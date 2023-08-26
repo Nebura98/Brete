@@ -13,8 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\CQRS-ES\CQRS.Core\CQRS.Core.csproj" />
-    <ProjectReference Include="..\..\Brete.Common\Brete.Common.csproj" />
-    <ProjectReference Include="..\Brete.Query.Infrastruture\Brete.Query.Infrastruture.csproj" />
+    <ProjectReference Include="..\Brete.Query.Infrastructure\Brete.Query.Infrastructure.csproj" />
     <ProjectReference Include="..\Brete.Query.Domain\Brete.Query.Domain.csproj" />
   </ItemGroup>
 

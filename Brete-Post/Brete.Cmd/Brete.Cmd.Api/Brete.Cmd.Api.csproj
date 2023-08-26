@@ -1,17 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="NewFolder\**" />
-    <Content Remove="NewFolder\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
-    <None Remove="NewFolder\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
@@ -21,8 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\CQRS-ES\CQRS.Core\CQRS.Core.csproj" />
     <ProjectReference Include="..\Brete.Cmd.Domain\Brete.Cmd.Domain.csproj" />
-    <ProjectReference Include="..\Brete.Cmd.Infrastruture\Brete.Cmd.Infrastruture.csproj" />
-    <ProjectReference Include="..\..\Brete.Common\Brete.Common.csproj" />
+    <ProjectReference Include="..\Brete.Cmd.Infrastructure\Brete.Cmd.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,41 +3,36 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRS.Core", "..\CQRS-ES\CQRS.Core\CQRS.Core.csproj", "{C0359A41-A860-4E2F-B31D-27B4B9BDC9DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CQRS.Core", "..\CQRS-ES\CQRS.Core\CQRS.Core.csproj", "{C0359A41-A860-4E2F-B31D-27B4B9BDC9DA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Brete.Cmd", "Brete.Cmd", "{E37D871A-EDC9-4F4E-BD87-372092D9DAB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brete.Cmd.Api", "Brete.Cmd\Brete.Cmd.Api\Brete.Cmd.Api.csproj", "{17900006-342B-4318-A330-9F3E825D1168}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brete.Cmd.Domain", "Brete.Cmd\Brete.Cmd.Domain\Brete.Cmd.Domain.csproj", "{54DE5863-0794-4F1B-AFDC-1B7E2C51B411}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brete.Cmd.Domain", "Brete.Cmd\Brete.Cmd.Domain\Brete.Cmd.Domain.csproj", "{54DE5863-0794-4F1B-AFDC-1B7E2C51B411}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brete.Cmd.Infrastruture", "Brete.Cmd\Brete.Cmd.Infrastruture\Brete.Cmd.Infrastruture.csproj", "{DB5E0DE6-4049-443D-A0E6-2D0CF80D7C99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brete.Cmd.Infrastructure", "Brete.Cmd\Brete.Cmd.Infrastructure\Brete.Cmd.Infrastructure.csproj", "{DB5E0DE6-4049-443D-A0E6-2D0CF80D7C99}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Brete.Query", "Brete.Query", "{CB855B60-9277-4BE7-9A4D-2A9B9BEC9E7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brete.Query.Api", "Brete.Query\Brete.Query.Api\Brete.Query.Api.csproj", "{4DC8ADFD-CF07-44C6-A830-DC4F6C6FC2E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brete.Query.Api", "Brete.Query\Brete.Query.Api\Brete.Query.Api.csproj", "{4DC8ADFD-CF07-44C6-A830-DC4F6C6FC2E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brete.Query.Domain", "Brete.Query\Brete.Query.Domain\Brete.Query.Domain.csproj", "{51EB3357-BF9E-4748-AE05-5F4188A33E09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brete.Query.Domain", "Brete.Query\Brete.Query.Domain\Brete.Query.Domain.csproj", "{51EB3357-BF9E-4748-AE05-5F4188A33E09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brete.Query.Infrastruture", "Brete.Query\Brete.Query.Infrastruture\Brete.Query.Infrastruture.csproj", "{79511E04-93F1-43F4-9C00-3AFA8154F905}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brete.Query.Infrastructure", "Brete.Query\Brete.Query.Infrastructure\Brete.Query.Infrastructure.csproj", "{79511E04-93F1-43F4-9C00-3AFA8154F905}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brete.Cmd.Api", "Brete.Cmd\Brete.Cmd.Api\Brete.Cmd.Api.csproj", "{DAE5339F-E744-405F-91FA-D48D9FAFEF89}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brete.Common", "Brete.Common\Brete.Common.csproj", "{C6601A3D-D8F3-4F3F-9F9F-F2FFECB4BC35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C0359A41-A860-4E2F-B31D-27B4B9BDC9DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C0359A41-A860-4E2F-B31D-27B4B9BDC9DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0359A41-A860-4E2F-B31D-27B4B9BDC9DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0359A41-A860-4E2F-B31D-27B4B9BDC9DA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17900006-342B-4318-A330-9F3E825D1168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17900006-342B-4318-A330-9F3E825D1168}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17900006-342B-4318-A330-9F3E825D1168}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17900006-342B-4318-A330-9F3E825D1168}.Release|Any CPU.Build.0 = Release|Any CPU
 		{54DE5863-0794-4F1B-AFDC-1B7E2C51B411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{54DE5863-0794-4F1B-AFDC-1B7E2C51B411}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54DE5863-0794-4F1B-AFDC-1B7E2C51B411}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -58,13 +53,27 @@ Global
 		{79511E04-93F1-43F4-9C00-3AFA8154F905}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79511E04-93F1-43F4-9C00-3AFA8154F905}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79511E04-93F1-43F4-9C00-3AFA8154F905}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAE5339F-E744-405F-91FA-D48D9FAFEF89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAE5339F-E744-405F-91FA-D48D9FAFEF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAE5339F-E744-405F-91FA-D48D9FAFEF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAE5339F-E744-405F-91FA-D48D9FAFEF89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6601A3D-D8F3-4F3F-9F9F-F2FFECB4BC35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6601A3D-D8F3-4F3F-9F9F-F2FFECB4BC35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6601A3D-D8F3-4F3F-9F9F-F2FFECB4BC35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6601A3D-D8F3-4F3F-9F9F-F2FFECB4BC35}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{17900006-342B-4318-A330-9F3E825D1168} = {E37D871A-EDC9-4F4E-BD87-372092D9DAB7}
 		{54DE5863-0794-4F1B-AFDC-1B7E2C51B411} = {E37D871A-EDC9-4F4E-BD87-372092D9DAB7}
 		{DB5E0DE6-4049-443D-A0E6-2D0CF80D7C99} = {E37D871A-EDC9-4F4E-BD87-372092D9DAB7}
 		{4DC8ADFD-CF07-44C6-A830-DC4F6C6FC2E4} = {CB855B60-9277-4BE7-9A4D-2A9B9BEC9E7B}
 		{51EB3357-BF9E-4748-AE05-5F4188A33E09} = {CB855B60-9277-4BE7-9A4D-2A9B9BEC9E7B}
 		{79511E04-93F1-43F4-9C00-3AFA8154F905} = {CB855B60-9277-4BE7-9A4D-2A9B9BEC9E7B}
+		{DAE5339F-E744-405F-91FA-D48D9FAFEF89} = {E37D871A-EDC9-4F4E-BD87-372092D9DAB7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {622552A7-C70E-43DC-9B0F-30FC943FE415}
 	EndGlobalSection
 EndGlobal
