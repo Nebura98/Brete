@@ -1,11 +1,14 @@
-﻿namespace Brete.Query.Domain.Repositories;
+﻿using Brete.Query.Domain.Entities;
+
+namespace Brete.Query.Domain.Repositories;
 
 public interface ICompanyRepository
 {
-    Task CreateAsync();
-    Task UpdateAsync();
-    Task DeleteAsync();
+    Task CreateAsync(CompanyEntity company);
+    Task UpdateAsync(CompanyEntity company);
+    Task DisableAsync(Guid companyId);
+    Task DeleteAsync(Guid companyId);
     Task GetByIdAsync(Guid companyId);
-    Task <List<Guid>> ListAllAsync();
-    Task<List<Guid>> SearchByCriteriaAsync();
+    Task<List<CompanyEntity>> ListAllAsync();
+    Task<List<CompanyEntity>> SearchByCriteriaAsync();
 }

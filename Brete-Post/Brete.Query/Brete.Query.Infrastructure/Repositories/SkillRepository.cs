@@ -4,46 +4,41 @@ using Brete.Query.Infrastructure.DataAccess;
 
 namespace Brete.Query.Infrastructure.Repositories;
 
-public class JobRepository : IJobRepository
+public sealed class SkillRepository : ISkillRepository
 {
     private readonly DatabaseContextFactory databaseContextFactory;
 
-    public JobRepository(DatabaseContextFactory databaseContextFactory)
+    public SkillRepository(DatabaseContextFactory databaseContextFactory)
     {
         this.databaseContextFactory = databaseContextFactory;
     }
 
-    public Task CreateAsync(JobEntity job)
+    public Task CreateAsync(SkillEntity skill)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteAsync(Guid jobId)
+    public Task DeleteAsync(Guid skillId)
     {
         throw new NotImplementedException();
     }
 
-    public Task DisableAsync(Guid jobId)
+    public Task DisableAsync(Guid skillId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<JobEntity> GetByIdAsync(Guid jobId)
+    public Task<SkillEntity> GetByIdAsync(Guid skillId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<JobEntity>> ListAllAsync(Guid jobId)
+    public Task<List<SkillEntity>> ListAllAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<JobEntity>> ListByCriteriaAsync(Guid jobId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateAsync(JobEntity job)
+    public Task UpdateAsync(SkillEntity skill)
     {
         throw new NotImplementedException();
     }

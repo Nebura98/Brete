@@ -1,4 +1,5 @@
-﻿using Brete.Query.Domain.Repositories;
+﻿using Brete.Query.Domain.Entities;
+using Brete.Query.Domain.Repositories;
 using Brete.Query.Infrastructure.DataAccess;
 
 namespace Brete.Query.Infrastructure.Repositories;
@@ -12,12 +13,17 @@ public class CompanyRepository : ICompanyRepository
         _databaseContextFactory = databaseContextFactory;
     }
 
-    public Task CreateAsync()
+    public Task CreateAsync(CompanyEntity company)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteAsync()
+    public Task DeleteAsync(Guid companyId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DisableAsync(Guid companyId)
     {
         throw new NotImplementedException();
     }
@@ -27,17 +33,17 @@ public class CompanyRepository : ICompanyRepository
         throw new NotImplementedException();
     }
 
-    public Task<List<Guid>> ListAllAsync()
+    public Task<List<CompanyEntity>> ListAllAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<Guid>> SearchByCriteriaAsync()
+    public Task<List<CompanyEntity>> SearchByCriteriaAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task UpdateAsync()
+    public Task UpdateAsync(CompanyEntity company)
     {
         throw new NotImplementedException();
     }

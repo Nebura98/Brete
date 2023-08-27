@@ -7,6 +7,7 @@ namespace Brete.Query.Domain.Entities;
 public class CompanyEntity
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid CompanyId { get; set; }
     public string Name { get; set; }
+    public virtual ICollection<JobEntity> Jobs { get; set; }
 }
