@@ -1,8 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CQRS.Core.Consumers;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
-using CQRS.Core.Consumers;
 
 namespace Brete.Query.Infrastructure.Consumers;
 

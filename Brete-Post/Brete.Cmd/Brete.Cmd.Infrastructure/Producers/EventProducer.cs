@@ -1,11 +1,8 @@
-﻿using System.Text.Json;
-
-using Microsoft.Extensions.Options;
-using Confluent.Kafka;
-
+﻿using Confluent.Kafka;
 using CQRS.Core.Events;
 using CQRS.Core.Producers;
-
+using Microsoft.Extensions.Options;
+using System.Text.Json;
 
 namespace Brete.Cmd.Infrastructure.Producers;
 

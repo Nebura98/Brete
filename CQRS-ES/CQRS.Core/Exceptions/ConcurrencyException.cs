@@ -1,6 +1,6 @@
 ﻿namespace CQRS.Core.Exceptions;
 
-public class ConcurrencyException : Exception
+public sealed class ConcurrencyException : Exception
 {
 
 }

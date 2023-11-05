@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Dtos\" />
+    <Folder Include="DTOs\" />
   </ItemGroup>
 
 </Project>

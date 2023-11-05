@@ -1,4 +1,5 @@
-﻿using CQRS.Core.Domain;
+﻿using Brete.Cmd.Domain.Aggregates;
+using CQRS.Core.Domain;
 using CQRS.Core.Events;
 using CQRS.Core.Exceptions;
 using CQRS.Core.Infrastructure;
@@ -60,7 +61,7 @@ public class EventStore : IEventStore
             {
                 TimeStamp = DateTime.Now,
                 AggregateIdentifier = aggregateId,
-                //AggregateType = nameof(PostAggregate),
+                AggregateType = nameof(JobAggregate),
                 Version = version,
                 EventType = eventType,
                 EventData = @event

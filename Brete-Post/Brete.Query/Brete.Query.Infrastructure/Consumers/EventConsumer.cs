@@ -1,12 +1,9 @@
-﻿using System.Text.Json;
-
-using Confluent.Kafka;
-using Microsoft.Extensions.Options;
-
-using CQRS.Core.Events;
-
-using Brete.Query.Infrastructure.Converters;
+﻿using Brete.Query.Infrastructure.Converters;
 using Brete.Query.Infrastructure.Handlers;
+using Confluent.Kafka;
+using CQRS.Core.Events;
+using Microsoft.Extensions.Options;
+using System.Text.Json;
 
 namespace Brete.Query.Infrastructure.Consumers;
 

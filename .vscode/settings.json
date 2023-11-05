@@ -1,3 +1,6 @@
 {
-    "dotnet.defaultSolution": "Brete-Post/Brete-Post.sln"
+    "dotnet.defaultSolution": "Brete-Post/Brete-Post.sln",
+    "cSpell.words": [
+        "Brete"
+    ]
 }

@@ -1,11 +1,8 @@
-﻿using Microsoft.Extensions.Options;
-using MongoDB.Driver;
-
-using Brete.Cmd.Infrastructure.Config;
-using CQRS.Core.Events;
+﻿using Brete.Cmd.Infrastructure.Config;
 using CQRS.Core.Domain;
-
-
+using CQRS.Core.Events;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace Brete.Cmd.Infrastructure.Repositories;
 
