@@ -1,23 +1,8 @@
 ﻿using Brete.Common.Events.Job;
 using CQRS.Core.Domain;
+using CQRS.Core.Domain.ValueObject;
 
-namespace Brete.Cmd.Domain.Aggregates;
-
-enum Seniority
-{
-    Entry,
-    Junior,
-    Medium,
-    Senior,
-    Lead
-};
-
-enum Modality
-{
-    Remote,
-    Office,
-    Hybrid
-};
+namespace Brete.Cmd.Domain.Aggregates.JobAggregate;
 
 public sealed class JobAggregate: AggregateRoot
 {
@@ -56,8 +41,8 @@ public sealed class JobAggregate: AggregateRoot
 
 
       //Edit job
-    public void EditJob(Guid jobId, string title, Guid companyId, string description, List<Guid> skills, decimal salary, byte seniority, byte modality, bool isOpen, bool isDeleted)
-    {
+    public void EditJob(Guid jobId, string title, Guid companyId, string description, List<Guid> skills, decimal salary, byte seniority, byte modality)
+    {        
         RaiseEvent(new JobUpdatedEvent
         {
             JobId       = jobId,
@@ -112,6 +97,24 @@ public sealed class JobAggregate: AggregateRoot
     {
         _id        = @event.JobId;
         _isDeleted = @event.IsDeleted;
+    }
+
+      //Remove job 
+
+    public void RemoveJob(Guid JobId)
+    {
+        RaiseEvent(
+            new JobRemovedEvent
+            {
+                JobId = JobId
+            }
+        );
+
+    }
+
+    public void Apply(JobRemovedEvent @event)
+    {
+        _id = @event.JobId;
     }
 
 }

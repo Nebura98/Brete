@@ -1,5 +1,4 @@
 ﻿using CQRS.Core.Events;
-using System.ComponentModel.DataAnnotations;
 
 namespace Brete.Common.Events.Job;
 

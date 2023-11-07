@@ -11,7 +11,7 @@ public class JobEntity
     public Guid CompanyId { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
-    public virtual ICollection<SkillEntity> Skills { get; set; }
+    public virtual ICollection<SkillEntity>? Skills { get; set; }
     public decimal Salary { get; set; }
     public byte Seniority { get; set; }
     public byte Modality { get; set; }

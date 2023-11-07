@@ -14,6 +14,6 @@ public sealed record JobUpdatedEvent : BaseEvent
     public required decimal Salary { get; set; }
     public required byte Seniority { get; set; }
     public required byte Modality { get; set; }
-    public bool IsOpen { get; set; } = true;
-    public bool IsDeleted { get; set; } = false;
+    public bool IsOpen { get; set; }
+    public bool IsDeleted { get; set; }
 }
