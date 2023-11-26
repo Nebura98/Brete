@@ -1,4 +1,4 @@
-﻿using Brete.Cmd.Domain.Aggregates;
+﻿using Brete.Cmd.Domain.Aggregates.JobAggregate;
 using CQRS.Core.Domain;
 using CQRS.Core.Handlers;
 using CQRS.Core.Infrastructure;

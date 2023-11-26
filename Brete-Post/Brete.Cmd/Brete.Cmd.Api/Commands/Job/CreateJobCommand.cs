@@ -1,11 +1,9 @@
-﻿using CQRS.Core.Events;
+﻿using CQRS.Core.Commands;
 
-namespace Brete.Common.Events.Job;
+namespace Brete.Cmd.Api.Commands.Job;
 
-public sealed record JobCreatedEvent : BaseEvent
+public record CreateJobCommand : BaseCommand
 {
-    public JobCreatedEvent() : base(nameof(JobCreatedEvent)) { }
-
     public required Guid CompanyId { get; set; }
     public required string Title { get; set; }
     public required string Description { get; set; }

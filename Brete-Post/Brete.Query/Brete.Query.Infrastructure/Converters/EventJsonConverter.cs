@@ -1,7 +1,7 @@
-﻿using CQRS.Core.Events;
+﻿using Brete.Common.Events.Job;
+using CQRS.Core.Events;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Brete.Common.Events.Job;
 
 
 namespace Brete.Query.Infrastructure.Converters;

@@ -11,26 +11,22 @@ internal enum Modality
 
 public sealed class JobModality : StringValueObject
 {
-    private JobModality(string value) : base(value)
+    public JobModality(string value) : base(value)
     {
     }
 
-    public static Result<JobModality> Create(string modality)
+    public override bool CheckDomainRules<T>(T value)
     {
-        List<string> ErrorMessages = new() { "Modality" };
-
-        if (string.IsNullOrWhiteSpace(modality))
+        if (string.IsNullOrWhiteSpace(Value))
         {
             ErrorMessages.Add("Modality can not be empty");
         }
 
-        if (!Enum.IsDefined(typeof(Modality), modality))
+        if (!Enum.IsDefined(typeof(Modality), Value))
         {
             ErrorMessages.Add($"Job modality just allow the following values '[Remote, Office,  Hybrid]'");
         }
 
-        return ErrorMessages.Count < 1
-                ? Result<JobModality>.Failure(string.Join(",", ErrorMessages))
-                : Result<JobModality>.Success(new(modality));
+        return ErrorMessages.Count == 0;
     }
 }

@@ -14,26 +14,22 @@ internal enum Seniority
 
 public class JobSeniority : StringValueObject
 {
-    private JobSeniority(string value) : base(value)
+    public JobSeniority(string value) : base(value)
     {
     }
 
-    public static Result<JobSeniority> Create(string seniority)
+    public override bool CheckDomainRules<T>(T value)
     {
-        List<string> ErrorMessages = new();
-
-        if (string.IsNullOrWhiteSpace(seniority))
+        if (string.IsNullOrWhiteSpace(Value))
         {
             ErrorMessages.Add("Seniority can not be empty");
         }
 
-        if (!Enum.IsDefined(typeof(Seniority), seniority))
+        if (!Enum.IsDefined(typeof(Seniority), Value))
         {
-            ErrorMessages.Add($"Job just allow the following values '[Entry, Junior, Medium, Senior,Lead]'");
+            ErrorMessages.Add($"Job just allow the following values '[Entry, Junior, Medium, Senior, Lead]'");
         }
 
-        return ErrorMessages.Count < 1
-                     ? Result<JobSeniority>.Failure(string.Join(",", ErrorMessages))
-                     : Result<JobSeniority>.Success(new(seniority));
+        return ErrorMessages.Count == 0;
     }
 }
