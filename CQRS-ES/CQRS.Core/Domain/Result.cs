@@ -1,34 +1,15 @@
-using System.Text;
 
 namespace CQRS.Core.Domain.ValueObject;
 
-public sealed record Result<T>
+public sealed record Result
 {
     public bool IsSuccess { get; private init; }
-    public T? Value { get; private init; }
-    public string? ErrorMessage { get; private init; }
+    public List<string> ErrorMessages { get; private init; } = Enumerable.Empty<string>().ToList();
     private Result() { }
-    public static Result<T> Success(T value)             => new() { IsSuccess = true, Value = value };
-    public static Result<T> Failure(string errorMessage) => new()
+    public static Result Success() => new() { IsSuccess = true };
+    public static Result Failure(List<string> errorMessages) => new()
     {
-        IsSuccess    = false,
-        ErrorMessage = errorMessage
+        IsSuccess = false,
+        ErrorMessages = errorMessages
     };
-    public static string GetErrorMessages(IReadOnlyCollection<Result<T>> results)
-    {
-        StringBuilder ErrorMessages = new();
-        foreach (var result in results)
-        {
-            if (result.IsSuccess is false)
-            {
-                string ErrorTitle   = result.ErrorMessage.Split(',')[0];
-                string ErrorMessage = result.ErrorMessage.Split(ErrorTitle)[1];
-                ErrorMessages.AppendLine(
-                    $"{ErrorTitle}:[{ErrorMessage}]"
-                );
-            }
-        }
-
-        return ErrorMessages.ToString();
-    }
 }

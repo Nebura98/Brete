@@ -1,7 +1,9 @@
 namespace CQRS.Core.Domain.ValueObject;
 
-public abstract class ValueObject: IEquatable<ValueObject>
+public abstract class ValueObject : IEquatable<ValueObject>
 {
+    public IList<string> ErrorMessages { get; private set; } = new List<string>();
+
     public abstract IEnumerable<object> GetAtomicValues();
 
     public bool Equals(ValueObject? other)

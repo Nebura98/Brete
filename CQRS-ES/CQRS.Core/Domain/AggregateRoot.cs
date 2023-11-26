@@ -5,7 +5,7 @@ public abstract class AggregateRoot
 {
     protected Guid _id;
     private readonly List<BaseEvent> _changes = new();
-    public  int Version { get; set; }         = -1;
+    public int Version { get; set; } = -1;
 
     public Guid Id
     {

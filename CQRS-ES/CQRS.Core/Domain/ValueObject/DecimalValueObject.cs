@@ -1,6 +1,6 @@
 namespace CQRS.Core.Domain.ValueObject;
 
-public abstract class DecimalValueObject: ValueObject
+public abstract class DecimalValueObject : ValueObject
 {
     public decimal Value { get; init; }
 
