@@ -10,7 +10,6 @@ public sealed class JobTitle : StringValueObject
     {
     }
 
-
     public override bool CheckDomainRules<T>(T value)
     {
         string PATTERN = @"^[A-Za-z/.,]+$";

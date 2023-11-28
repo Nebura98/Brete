@@ -5,6 +5,12 @@
     <ProjectReference Include="..\..\Brete.Common\Brete.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Aggregates\SkillAggregate\" />
+    <Folder Include="Aggregates\StaffAggregate\" />
+    <Folder Include="Aggregates\UserAggregate\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

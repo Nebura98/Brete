@@ -23,22 +23,17 @@ public sealed class JobAggregate : AggregateRoot
     //Add new job event
     public JobAggregate(Guid jobId, Guid companyId, string title, string description, IReadOnlyList<string> skills, decimal salary, string seniority, string modality)
     {
-        var jobTitle = new JobTitle(title);
-        var jobDescription = new JobDescription(description);
-        var jobSalary = new JobMoney(salary, "", "");
-        var jobSeniority = new JobSeniority(seniority);
-        var jobModality = new JobModality(modality);
 
         RaiseEvent(new JobCreatedEvent
         {
             Id = jobId,
             CompanyId = companyId,
-            Title = jobTitle.Value,
-            Description = jobDescription.Value,
+            Title = title,
+            Description = description,
             Skills = skills,
-            Salary = jobSalary.Salary,
-            Seniority = jobSeniority.Value,
-            Modality = jobModality.Value,
+            Salary = salary,
+            Seniority = seniority,
+            Modality = modality,
         });
     }
 
@@ -50,24 +45,20 @@ public sealed class JobAggregate : AggregateRoot
 
 
     //Edit job
-    public void EditJob(Guid jobId, string title, string description, List<string> skills, decimal salary, string seniority, string modality)
+    public void EditJob(Guid jobId, string title, string description, List<string> skills, decimal salary, string seniority, string modality, bool isOpen)
     {
-
-        var jobTitle = new JobTitle(title);
-        var jobDescription = new JobDescription(description);
-        var jobMoney = new JobMoney(salary, "", "");
-        var jobSeniority = new JobSeniority(seniority);
-        var jobModality = new JobModality(modality);
 
         RaiseEvent(new JobUpdatedEvent
         {
-            JobId = jobId,
-            Title = jobTitle.Value,
-            Description = jobDescription.Value,
+            Id = jobId,
+            Title = title,
+            Description = description,
             Skills = skills,
-            Salary = jobMoney.Salary,
-            Seniority = jobSeniority.Value,
-            Modality = jobModality.Value,
+            Salary = salary,
+            Seniority = seniority,
+            Modality = modality,
+            IsOpen = isOpen,
+            IsDeleted = false
         });
     }
 
@@ -77,7 +68,7 @@ public sealed class JobAggregate : AggregateRoot
     }
 
     //Change state of the job open or close
-    public void ChangeJobState(Guid JobId, Guid CompanyId, bool IsOpen)
+    public void ChangeStateJob(Guid JobId, Guid CompanyId, bool IsOpen)
     {
         RaiseEvent(new JobChangeStateEvent
         {

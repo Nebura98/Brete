@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\Staff\" />
+    <Folder Include="Commands\User\" />
+    <Folder Include="Controllers\Staff\" />
+    <Folder Include="Controllers\User\" />
     <Folder Include="DTOs\" />
   </ItemGroup>
 

@@ -9,7 +9,6 @@ public abstract class StringValueObject : ValueObject, INormalize
         Value = CheckDomainRules(value) ? value.Trim().ToUpperInvariant() : string.Empty;
     }
 
-
     public override IEnumerable<object> GetAtomicValues()
     {
         yield return Value;
