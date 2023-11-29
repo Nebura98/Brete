@@ -7,8 +7,8 @@ namespace Brete.Cmd.Domain.Aggregates.JobAggregate;
 public sealed class JobAggregate : AggregateRoot
 {
     private Guid _companyId;
-    private bool _isOpen = false;
-    private bool _isDeleted = false;
+    private bool _isOpen;
+    private bool _isDeleted;
     private bool _active;
 
     public Guid CompanyId { get => _companyId; set => _companyId = value; }
@@ -68,13 +68,13 @@ public sealed class JobAggregate : AggregateRoot
     }
 
     //Change state of the job open or close
-    public void ChangeStateJob(Guid JobId, Guid CompanyId, bool IsOpen)
+    public void ChangeStateJob(Guid jobId, Guid companyId, bool isOpen)
     {
         RaiseEvent(new JobChangeStateEvent
         {
-            JobId = JobId,
-            CompanyId = CompanyId,
-            IsOpen = IsOpen
+            JobId = jobId,
+            CompanyId = companyId,
+            IsOpen = isOpen
         });
     }
 
@@ -87,12 +87,12 @@ public sealed class JobAggregate : AggregateRoot
     }
 
     //delete of the job open or close
-    public void DeleteJob(Guid JobId, bool IsDeleted)
+    public void DeleteJob(Guid jobId, bool isDeleted)
     {
         RaiseEvent(new JobDeletedEvent
         {
-            JobId = JobId,
-            IsDeleted = IsDeleted
+            JobId = jobId,
+            IsDeleted = isDeleted
         });
     }
 

@@ -6,7 +6,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Aggregates\SkillAggregate\" />
     <Folder Include="Aggregates\StaffAggregate\" />
     <Folder Include="Aggregates\UserAggregate\" />
   </ItemGroup>
