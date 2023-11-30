@@ -1,6 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <Compile Remove="Events\Company1\**" />
+    <EmbeddedResource Remove="Events\Company1\**" />
+    <None Remove="Events\Company1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\CQRS-ES\CQRS.Core\CQRS.Core.csproj" />
   </ItemGroup>
 
