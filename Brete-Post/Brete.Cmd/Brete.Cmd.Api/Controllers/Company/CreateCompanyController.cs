@@ -7,19 +7,19 @@ namespace Brete.Cmd.Api.Controllers.Company;
 
 [Route("api/[controller]")]
 [ApiController]
-public class PostCompanyController : ControllerBase
+public class CreateCompanyController : ControllerBase
 {
-    private readonly ILogger<PostCompanyController> _logger;
+    private readonly ILogger<CreateCompanyController> _logger;
     private readonly ICommandDispatcher _commandDispatcher;
 
-    public PostCompanyController(ICommandDispatcher commandDispatcher, ILogger<PostCompanyController> logger)
+    public CreateCompanyController(ICommandDispatcher commandDispatcher, ILogger<CreateCompanyController> logger)
     {
         _commandDispatcher = commandDispatcher;
         _logger = logger;
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostCompanyAsync(CreateCompanyCommand command)
+    public async Task<IActionResult> CreateCompanyAsync(CreateCompanyCommand command)
     {
         try
         {
