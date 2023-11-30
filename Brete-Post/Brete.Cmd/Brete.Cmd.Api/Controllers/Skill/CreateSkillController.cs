@@ -7,19 +7,19 @@ namespace Brete.Cmd.Api.Controllers.Skill;
 
 [Route("api/[controller]")]
 [ApiController]
-public class PostSkillController : ControllerBase
+public class CreateSkillController : ControllerBase
 {
-    private readonly ILogger<PostSkillController> _logger;
+    private readonly ILogger<CreateSkillController> _logger;
     private readonly ICommandDispatcher _commandDispatcher;
 
-    public PostSkillController(ICommandDispatcher commandDispatcher, ILogger<PostSkillController> logger)
+    public CreateSkillController(ICommandDispatcher commandDispatcher, ILogger<CreateSkillController> logger)
     {
         _commandDispatcher = commandDispatcher;
         _logger = logger;
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostSkillAsync(CreateSkillCommand command)
+    public async Task<IActionResult> CreateSkillAsync(CreateSkillCommand command)
     {
         try
         {

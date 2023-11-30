@@ -3,24 +3,24 @@ using CQRS.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Post.Common.DTOs;
 
-namespace Brete.Cmd.Api.Controllers.Job;
+namespace Brete.Cmd.Api.Controllers.Skill;
 
 [Route("api/[controller]")]
 [ApiController]
-public class DisableCompanyController : ControllerBase
+public class DisableSkillController : ControllerBase
 {
 
-    private readonly ILogger<DisableCompanyController> _logger;
+    private readonly ILogger<DisableSkillController> _logger;
     private readonly ICommandDispatcher _commandDispatcher;
 
-    public DisableCompanyController(ICommandDispatcher commandDispatcher, ILogger<DisableCompanyController> logger)
+    public DisableSkillController(ICommandDispatcher commandDispatcher, ILogger<DisableSkillController> logger)
     {
         _commandDispatcher = commandDispatcher;
         _logger = logger;
     }
 
     [HttpPut]
-    public async Task<IActionResult> DisableJobAsync(Guid JobId, DisableJobCommand command)
+    public async Task<IActionResult> DisableSkillAsync(Guid JobId, DisableJobCommand command)
     {
         try
         {

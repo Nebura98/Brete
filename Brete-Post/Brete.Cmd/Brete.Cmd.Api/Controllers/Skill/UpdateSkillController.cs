@@ -9,12 +9,12 @@ namespace Brete.Cmd.Api.Controllers.Skill;
 [Authorize(Policy = "RequireAdministratorRole")]
 [Route("api/[controller]")]
 [ApiController]
-public class UpdateCompanyController : ControllerBase
+public class UpdateSkillController : ControllerBase
 {
-    private readonly ILogger<UpdateCompanyController> _logger;
+    private readonly ILogger<UpdateSkillController> _logger;
     private readonly ICommandDispatcher _commandDispatcher;
 
-    public UpdateCompanyController(ICommandDispatcher commandDispatcher, ILogger<UpdateCompanyController> logger)
+    public UpdateSkillController(ICommandDispatcher commandDispatcher, ILogger<UpdateSkillController> logger)
     {
         _commandDispatcher = commandDispatcher;
         _logger = logger;
