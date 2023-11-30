@@ -10,5 +10,4 @@ public interface IJobRepository
     Task DeleteAsync(Guid jobId);
     Task<JobEntity> GetByIdAsync(Guid jobId);
     Task<List<JobEntity>> ListAllAsync(Guid jobId);
-    Task<List<JobEntity>> ListByCriteriaAsync(Guid jobId);
 }
