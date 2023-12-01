@@ -15,7 +15,10 @@ public class UserEntity
     [Required, StringLength(50)]
     public string Email { get; set; }
     [Required, StringLength(50)]
+    public bool IsEmailConfirmed { get; set; }
     public string Password { get; set; }
     [StringLength(14)]
     public string PhoneNumber { get; set; }
+    public bool IsDisable { get; set; }
+    public bool IsDeleted { get; set; }
 }
