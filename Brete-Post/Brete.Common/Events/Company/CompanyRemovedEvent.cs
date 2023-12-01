@@ -7,4 +7,6 @@ public sealed record CompanyRemovedEvent : BaseEvent
     public CompanyRemovedEvent() : base(nameof(CompanyRemovedEvent))
     {
     }
+    public bool IsActive { get; set; }
+
 }
