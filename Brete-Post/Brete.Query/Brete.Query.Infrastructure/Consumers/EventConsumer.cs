@@ -1,13 +1,14 @@
 ﻿using Brete.Query.Infrastructure.Converters;
 using Brete.Query.Infrastructure.Handlers;
 using Confluent.Kafka;
+using CQRS.Core.Consumers;
 using CQRS.Core.Events;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
 
 namespace Brete.Query.Infrastructure.Consumers;
 
-public class EventConsumer
+public class EventConsumer : IEventConsumer
 {
     private readonly ConsumerConfig _config;
     private readonly IEventHandler _eventHandler;
@@ -26,6 +27,8 @@ public class EventConsumer
                 .SetKeyDeserializer(Deserializers.Utf8)
                 .SetValueDeserializer(Deserializers.Utf8)
                 .Build();
+
+        Console.WriteLine(topic);
 
         consumer.Subscribe(topic);
 

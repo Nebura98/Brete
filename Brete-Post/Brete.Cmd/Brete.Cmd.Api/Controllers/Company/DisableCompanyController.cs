@@ -1,4 +1,4 @@
-﻿using Brete.Cmd.Api.Commands.Skill;
+﻿using Brete.Cmd.Api.Commands.Company;
 using CQRS.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Post.Common.DTOs;

@@ -8,6 +8,11 @@ public sealed class SkillAggregate : AggregateRoot
     private bool _active;
     public bool Active { get => _active; set => _active = value; }
 
+    public SkillAggregate()
+    {
+    }
+
+
     public SkillAggregate(Guid SkillId, string name, string description, string section)
     {
 
@@ -43,14 +48,14 @@ public sealed class SkillAggregate : AggregateRoot
 
     public void SwitchStateSkill(Guid SkillId, bool isDisable)
     {
-        RaiseEvent(new SkillSwitchStateEvent
+        RaiseEvent(new SkillDisableEvent
         {
             Id = SkillId,
             IsDisable = isDisable
         });
     }
 
-    public void Apply(SkillSwitchStateEvent @event)
+    public void Apply(SkillDisableEvent @event)
     {
         _id = @event.Id;
     }

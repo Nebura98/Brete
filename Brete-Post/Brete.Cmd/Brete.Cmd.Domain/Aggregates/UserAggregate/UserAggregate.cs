@@ -36,7 +36,7 @@ public sealed class UserAggregate : AggregateRoot
 
     public void UpdatedUserSwitched() { }
 
-    public void Apply(UserSwitchedEvent @event) { }
+    public void Apply(UserDisableEvent @event) { }
 
     public void UpdatedPassword() { }
 

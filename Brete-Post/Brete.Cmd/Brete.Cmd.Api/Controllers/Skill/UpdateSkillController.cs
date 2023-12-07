@@ -1,12 +1,10 @@
 ﻿using Brete.Cmd.Api.Commands.Skill;
 using CQRS.Core.Infrastructure;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Post.Common.DTOs;
 
 namespace Brete.Cmd.Api.Controllers.Skill;
 
-[Authorize(Policy = "RequireAdministratorRole")]
 [Route("api/[controller]")]
 [ApiController]
 public class UpdateSkillController : ControllerBase

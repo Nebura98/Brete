@@ -7,10 +7,8 @@ namespace Brete.Query.Domain.Entities;
 [Table("Company", Schema = "dbo")]
 [Index(nameof(Name), IsUnique = true)]
 [Index(nameof(LegalName), IsUnique = true)]
-public class CompanyEntity
+public class CompanyEntity : BaseEntity
 {
-    [Key]
-    public string Id { get; set; }
     [Required, StringLength(128)]
     public string Name { get; set; }
     [Required, StringLength(128)]
@@ -27,6 +25,4 @@ public class CompanyEntity
     public string Industry { get; set; }
     public string Size { get; set; }
     public DateTime FoundingDate { get; set; }
-    public string Status { get; set; }
-    public bool IsActive { get; set; }
 }

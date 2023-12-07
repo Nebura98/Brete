@@ -2,12 +2,26 @@ using Brete.Cmd.Api.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Add services to the container.
-//builder.Services.Configure<MongoDbConfig>(builder.Configuration.GetSection(nameof(MongoDbConfig)));
-//builder.Services.Configure<ProducerConfig>(builder.Configuration.GetSection(nameof(ProducerConfig)));
+//Load bson classes
+
+BsonConfiguration.MapBsonClasses();
+
+//Load Databases
+
+builder.ConfigureMongoDatabase();
+builder.ConfigureKafka();
+
+//Load services
 
 builder.Services.ConfigureService();
 
+//Load commands
+
+builder.ConfigureCommands();
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 

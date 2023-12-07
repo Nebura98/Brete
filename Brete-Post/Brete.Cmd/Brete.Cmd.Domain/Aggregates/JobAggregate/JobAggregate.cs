@@ -21,14 +21,14 @@ public sealed class JobAggregate : AggregateRoot
     }
 
     //Add new job event
-    public JobAggregate(Guid jobId, Guid companyId, string title, string description, IReadOnlyList<string> skills, decimal salary, string seniority, string modality)
+    public JobAggregate(Guid jobId, Guid companyId, string title, string description, ICollection<Guid> skills, decimal salary, string seniority, string modality)
     {
-
         RaiseEvent(new JobCreatedEvent
         {
             Id = jobId,
             CompanyId = companyId,
             Title = title,
+            Slug = $"{title.Trim().ToLowerInvariant().Replace(" ", "-")}-{jobId}",
             Description = description,
             Skills = skills,
             Salary = salary,
@@ -45,20 +45,18 @@ public sealed class JobAggregate : AggregateRoot
 
 
     //Edit job
-    public void EditJob(Guid jobId, string title, string description, List<string> skills, decimal salary, string seniority, string modality, bool isOpen)
+    public void EditJob(Guid jobId, string title, string description, List<Guid> skills, decimal salary, string seniority, string modality)
     {
-
         RaiseEvent(new JobUpdatedEvent
         {
             Id = jobId,
             Title = title,
+            Slug = $"{title.Trim().ToLowerInvariant().Replace(" ", "-")}-{jobId}",
             Description = description,
             Skills = skills,
             Salary = salary,
             Seniority = seniority,
             Modality = modality,
-            IsOpen = isOpen,
-            IsDeleted = false
         });
     }
 
@@ -68,22 +66,19 @@ public sealed class JobAggregate : AggregateRoot
     }
 
     //Change state of the job open or close
-    public void ChangeStateJob(Guid jobId, Guid companyId, bool isOpen)
+    public void ChangeStateJob(Guid jobId, bool isOpen)
     {
-        RaiseEvent(new JobChangeStateEvent
+        RaiseEvent(new JobDisableEvent
         {
-            JobId = jobId,
-            CompanyId = companyId,
-            IsOpen = isOpen
+            Id = jobId,
+            IsOpen = isOpen,
         });
     }
 
 
-    public void Apply(JobChangeStateEvent @event)
+    public void Apply(JobDisableEvent @event)
     {
         _id = @event.Id;
-        _companyId = @event.CompanyId;
-        _isOpen = @event.IsOpen;
     }
 
     //delete of the job open or close
@@ -91,32 +86,29 @@ public sealed class JobAggregate : AggregateRoot
     {
         RaiseEvent(new JobDeletedEvent
         {
-            JobId = jobId,
-            IsDeleted = isDeleted
+            Id = jobId,
+            IsDeleted = isDeleted,
         });
     }
 
 
     public void Apply(JobDeletedEvent @event)
     {
-        _id = @event.JobId;
+        _id = @event.Id;
         _isDeleted = @event.IsDeleted;
     }
 
     //Remove job 
     public void RemoveJob(Guid JobId)
     {
-        RaiseEvent(
-            new JobRemovedEvent
-            {
-                JobId = JobId
-            }
-        );
-
+        RaiseEvent(new JobRemovedEvent
+        {
+            Id = JobId
+        });
     }
 
     public void Apply(JobRemovedEvent @event)
     {
-        _id = @event.JobId;
+        _id = @event.Id;
     }
 }

@@ -15,15 +15,14 @@ public static class ServicesConfiguration
 {
     public static IServiceCollection ConfigureService(this IServiceCollection services)
     {
-        services.AddControllers();
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
-
         services.AddScoped<IEventStoreRepository, EventStoreRepository>();
         services.AddScoped<IEventProducer, EventProducer>();
         services.AddScoped<IEventStore, EventStore>();
-        services.AddScoped<IEventSourcingHandler<JobAggregate>, EventSourcingHandler>();
+        services.AddScoped<IEventSourcingHandler<JobAggregate>, JobEventSourcingHandler>();
+        //services.AddScoped<IEventSourcingHandler<CompanyAggregate>, CompanyEventSourcingHandler>();
+        //services.AddScoped<IEventSourcingHandler<SkillAggregate>, SkillEventSourcingHandler>();
         services.AddScoped<ICommandHandler, CommandHandler>();
+
         return services;
     }
 }

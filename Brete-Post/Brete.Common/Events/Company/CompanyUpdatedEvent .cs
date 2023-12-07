@@ -15,7 +15,7 @@ public sealed record CompanyUpdatedEvent : BaseEvent
     public string Website { get; set; }
     public required string Industry { get; set; }
     public string Size { get; set; }
-    public DateTime FoundingDate { get; set; }
+    public DateOnly FoundingDate { get; set; }
     public string Status { get; set; }
     public bool IsActive { get; set; }
 }

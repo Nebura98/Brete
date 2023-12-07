@@ -7,29 +7,30 @@ namespace Brete.Cmd.Api.Controllers.Job;
 
 [Route("api/[controller]")]
 [ApiController]
-public class PostJobController : ControllerBase
+public class DeleteJobController : ControllerBase
 {
-    private readonly ILogger<PostJobController> _logger;
+
+    private readonly ILogger<DeleteJobController> _logger;
     private readonly ICommandDispatcher _commandDispatcher;
 
-    public PostJobController(ILogger<PostJobController> logger, ICommandDispatcher commandDispatcher)
+    public DeleteJobController(ICommandDispatcher commandDispatcher, ILogger<DeleteJobController> logger)
     {
-        _logger = logger;
         _commandDispatcher = commandDispatcher;
+        _logger = logger;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> PostJobAsync(CreateJobCommand command)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> DisableJobAsync(Guid id, DeleteJobCommand command)
     {
         try
         {
-            command.Id = Guid.NewGuid();
+            command.Id = id;
 
             await _commandDispatcher.SendAsync(command);
 
             return Ok(new BaseResponse
             {
-                Message = "Add Job request completed successfully!"
+                Message = "Delete Job request completed successfully!"
             });
         }
         catch (InvalidOperationException ex)

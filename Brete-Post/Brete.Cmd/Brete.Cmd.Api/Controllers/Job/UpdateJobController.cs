@@ -12,18 +12,18 @@ public class UpdateJobController : ControllerBase
     private readonly ILogger<UpdateJobController> _logger;
     private readonly ICommandDispatcher _commandDispatcher;
 
-    public UpdateJobController(ICommandDispatcher commandDispatcher, ILogger<UpdateJobController> logger)
+    public UpdateJobController(ILogger<UpdateJobController> logger, ICommandDispatcher commandDispatcher)
     {
-        _commandDispatcher = commandDispatcher;
         _logger = logger;
+        _commandDispatcher = commandDispatcher;
     }
 
-    [HttpPatch]
-    public async Task<IActionResult> UpdateJobAsync(Guid JobId, UpdateJobCommand command)
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> UpdateJobAsync(Guid id, UpdateJobCommand command)
     {
         try
         {
-            command.Id = JobId;
+            command.Id = id;
 
             await _commandDispatcher.SendAsync(command);
 

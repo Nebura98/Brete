@@ -2,9 +2,9 @@
 
 namespace Brete.Common.Events.Skill;
 
-public sealed record SkillSwitchStateEvent : BaseEvent
+public sealed record SkillDisableEvent : BaseEvent
 {
-    public SkillSwitchStateEvent() : base(nameof(SkillSwitchStateEvent))
+    public SkillDisableEvent() : base(nameof(SkillDisableEvent))
     {
     }
 

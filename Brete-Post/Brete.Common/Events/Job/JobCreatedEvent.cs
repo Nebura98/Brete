@@ -8,8 +8,9 @@ public sealed record JobCreatedEvent : BaseEvent
 
     public required Guid CompanyId { get; set; }
     public required string Title { get; set; }
+    public string Slug { get; set; }
     public required string Description { get; set; }
-    public IReadOnlyList<string>? Skills { get; set; }
+    public ICollection<Guid>? Skills { get; set; }
     public required decimal Salary { get; set; }
     public required string Seniority { get; set; }
     public required string Modality { get; set; }

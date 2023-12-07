@@ -6,12 +6,12 @@ using CQRS.Core.Producers;
 
 namespace Brete.Cmd.Infrastructure.Handlers;
 
-public sealed class EventSourcingHandler : IEventSourcingHandler<JobAggregate>
+public sealed class JobEventSourcingHandler : IEventSourcingHandler<JobAggregate>
 {
     private readonly IEventStore _eventStore;
     private readonly IEventProducer _eventProducer;
 
-    public EventSourcingHandler(IEventStore eventStore, IEventProducer eventProducer)
+    public JobEventSourcingHandler(IEventStore eventStore, IEventProducer eventProducer)
     {
         _eventStore = eventStore;
         _eventProducer = eventProducer;

@@ -1,6 +1,6 @@
 ﻿using CQRS.Core.Events;
 
-namespace Brete.Cmd.Domain.Aggregates.UserAggregate;
+namespace Brete.Common.Events.User;
 
 public sealed record UserResetPasswordEvent : BaseEvent
 {

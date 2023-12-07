@@ -1,17 +1,33 @@
 ﻿using Brete.Common.Events.Company;
 using CQRS.Core.Domain;
 
-namespace Brete.Cmd.Domain.Aggregates;
+namespace Brete.Cmd.Domain.Aggregates.CompanyAggregate;
 
 public sealed class CompanyAggregate : AggregateRoot
 {
     private bool _active;
     public bool Active { get => _active; set => _active = value; }
-    public CompanyAggregate(Guid companyId)
+
+    public CompanyAggregate()
+    {
+    }
+
+    public CompanyAggregate(string name, string legalName, string address, string phone, string email, string website, string industry, string size, DateOnly foundingDate, string status, bool isActive)
     {
         RaiseEvent(new CompanyCreatedEvent
         {
-            Id = companyId,
+            Name = name,
+            LegalName = legalName,
+            Address = address,
+            Phone = phone,
+            Email = email,
+            Website = website,
+            Industry = industry,
+            Size = size,
+            FoundingDate = foundingDate,
+            Status = status,
+            IsActive = isActive
+
         });
     }
 
@@ -21,12 +37,22 @@ public sealed class CompanyAggregate : AggregateRoot
         _active = true;
     }
 
-    public void UpdateCompany(Guid companyId)
+    public void UpdateCompany(string name, string legalName, string address, string phone, string email, string website, string industry, string size, DateOnly foundingDate, string status, bool isActive)
     {
         RaiseEvent(
             new CompanyUpdatedEvent
             {
-                Id = companyId
+                Name = name,
+                LegalName = legalName,
+                Address = address,
+                Phone = phone,
+                Email = email,
+                Website = website,
+                Industry = industry,
+                Size = size,
+                FoundingDate = foundingDate,
+                Status = status,
+                IsActive = isActive
             });
     }
 

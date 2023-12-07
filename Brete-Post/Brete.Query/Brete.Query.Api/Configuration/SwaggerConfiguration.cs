@@ -1,4 +1,4 @@
-﻿namespace Brete.Cmd.Api.Configuration;
+﻿namespace Brete.Query.Api.Configuration;
 
 public static class SwaggerConfiguration
 {

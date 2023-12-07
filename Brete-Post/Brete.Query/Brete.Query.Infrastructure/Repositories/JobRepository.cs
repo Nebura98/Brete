@@ -1,36 +1,48 @@
 ﻿using Brete.Query.Domain.Entities;
 using Brete.Query.Domain.Repositories;
 using Brete.Query.Infrastructure.DataAccess;
+using Microsoft.EntityFrameworkCore;
 
 namespace Brete.Query.Infrastructure.Repositories;
 
 public class JobRepository : IJobRepository
 {
-    private readonly DatabaseContextFactory databaseContextFactory;
+    private readonly DatabaseContextFactory _contextFactory;
 
-    public JobRepository(DatabaseContextFactory databaseContextFactory)
+    public JobRepository(DatabaseContextFactory contextFactory)
     {
-        this.databaseContextFactory = databaseContextFactory;
+        _contextFactory = contextFactory;
     }
 
-    public Task CreateAsync(JobEntity job)
+    public async Task CreateAsync(JobEntity job)
     {
-        throw new NotImplementedException();
+        using DatabaseContext context = _contextFactory.CreateDbContext();
+        context.Job.Add(job);
+
+        _ = await context.SaveChangesAsync();
     }
 
-    public Task DeleteAsync(Guid jobId)
+    public async Task DeleteAsync(JobEntity job)
     {
-        throw new NotImplementedException();
+        using DatabaseContext context = _contextFactory.CreateDbContext();
+        context.Job.Update(job);
+
+        _ = await context.SaveChangesAsync();
     }
 
-    public Task DisableAsync(Guid jobId)
+    public async Task DisableAsync(JobEntity job)
     {
-        throw new NotImplementedException();
+        using DatabaseContext context = _contextFactory.CreateDbContext();
+        context.Job.Update(job);
+
+        _ = await context.SaveChangesAsync();
     }
 
-    public Task<JobEntity> GetByIdAsync(Guid jobId)
+    public async Task<JobEntity> GetByIdAsync(Guid jobId)
     {
-        throw new NotImplementedException();
+        using DatabaseContext context = _contextFactory.CreateDbContext();
+        return await context.Job
+                    .FirstOrDefaultAsync(job => job.Id == jobId);
     }
 
     public Task<List<JobEntity>> ListAllAsync(Guid jobId)
@@ -38,13 +50,21 @@ public class JobRepository : IJobRepository
         throw new NotImplementedException();
     }
 
-    public Task<List<JobEntity>> ListByCriteriaAsync(Guid jobId)
+    public Task<List<JobEntity>> ListByCriteriaAsync(JobEntity job)
     {
         throw new NotImplementedException();
     }
 
-    public Task UpdateAsync(JobEntity job)
+    public Task RemoveAsync(JobEntity job)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task UpdateAsync(JobEntity job)
+    {
+        using DatabaseContext context = _contextFactory.CreateDbContext();
+        context.Job.Update(job);
+
+        _ = await context.SaveChangesAsync();
     }
 }
