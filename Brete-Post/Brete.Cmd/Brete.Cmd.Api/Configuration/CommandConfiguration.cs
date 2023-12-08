@@ -1,5 +1,6 @@
 ﻿using Brete.Cmd.Api.Commands;
 using Brete.Cmd.Api.Commands.Job;
+using Brete.Cmd.Api.Commands.Skill;
 using Brete.Cmd.Infrastructure.Dispatchers;
 using CQRS.Core.Infrastructure;
 
@@ -22,10 +23,10 @@ public static class CommandConfiguration
         dispatcher.RegisterHandler<DisableJobCommand>(commandHandler.HandleAsync);
         dispatcher.RegisterHandler<DeleteJobCommand>(commandHandler.HandleAsync);
         dispatcher.RegisterHandler<RemoveJobCommand>(commandHandler.HandleAsync);
-        //dispatcher.RegisterHandler<CreateSkillCommand>(commandHandler.HandleAsync);
-        //dispatcher.RegisterHandler<UpdateSkillCommand>(commandHandler.HandleAsync);
-        //dispatcher.RegisterHandler<DisableSkillCommand>(commandHandler.HandleAsync);
-        //dispatcher.RegisterHandler<RemoveSkillCommand>(commandHandler.HandleAsync);
+        dispatcher.RegisterHandler<CreateSkillCommand>(commandHandler.HandleAsync);
+        dispatcher.RegisterHandler<UpdateSkillCommand>(commandHandler.HandleAsync);
+        dispatcher.RegisterHandler<DisableSkillCommand>(commandHandler.HandleAsync);
+        dispatcher.RegisterHandler<DeleteSkillCommand>(commandHandler.HandleAsync);
         builder.Services.AddSingleton<ICommandDispatcher>(_ => dispatcher);
 
         return builder;

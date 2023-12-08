@@ -12,7 +12,6 @@ public sealed class SkillAggregate : AggregateRoot
     {
     }
 
-
     public SkillAggregate(Guid SkillId, string name, string description, string section)
     {
 
@@ -60,11 +59,12 @@ public sealed class SkillAggregate : AggregateRoot
         _id = @event.Id;
     }
 
-    public void DeletedSkill(Guid SkillId)
+    public void DeletedSkill(Guid SkillId, bool isDeleted)
     {
         RaiseEvent(new SkillDeletedEvent
         {
             Id = SkillId,
+            IsDeleted = isDeleted
         });
     }
 

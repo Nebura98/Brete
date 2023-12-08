@@ -7,23 +7,23 @@ namespace Brete.Cmd.Api.Controllers.Skill;
 
 [Route("api/[controller]")]
 [ApiController]
-public class RemoveSkillController : ControllerBase
+public class DeleteSkillController : ControllerBase
 {
-    private readonly ILogger<RemoveSkillController> _logger;
+    private readonly ILogger<DeleteSkillController> _logger;
     private readonly ICommandDispatcher _commandDispatcher;
 
-    public RemoveSkillController(ICommandDispatcher commandDispatcher, ILogger<RemoveSkillController> logger)
+    public DeleteSkillController(ICommandDispatcher commandDispatcher, ILogger<DeleteSkillController> logger)
     {
         _commandDispatcher = commandDispatcher;
         _logger = logger;
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> RemoveSkillAsync(Guid SkillId, RemoveSkillCommand command)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> RemoveSkillAsync(Guid id, DeleteSkillCommand command)
     {
         try
         {
-            command.Id = SkillId;
+            command.Id = id;
 
             await _commandDispatcher.SendAsync(command);
 

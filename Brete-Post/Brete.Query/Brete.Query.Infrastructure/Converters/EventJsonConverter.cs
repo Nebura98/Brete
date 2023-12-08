@@ -37,6 +37,7 @@ public class EventJsonConverter : JsonConverter<BaseEvent>
             nameof(JobUpdatedEvent) => JsonSerializer.Deserialize<JobUpdatedEvent>(json, options),
             nameof(JobDisableEvent) => JsonSerializer.Deserialize<JobDisableEvent>(json, options),
             nameof(JobDeletedEvent) => JsonSerializer.Deserialize<JobDeletedEvent>(json, options),
+            nameof(JobRemovedEvent) => JsonSerializer.Deserialize<JobRemovedEvent>(json, options),
             nameof(CompanyCreatedEvent) => JsonSerializer.Deserialize<CompanyCreatedEvent>(json, options),
             nameof(CompanyUpdatedEvent) => JsonSerializer.Deserialize<CompanyUpdatedEvent>(json, options),
             nameof(CompanyDisableEvent) => JsonSerializer.Deserialize<CompanyDisableEvent>(json, options),

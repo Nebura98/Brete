@@ -1,36 +1,49 @@
 ﻿using Brete.Query.Domain.Entities;
 using Brete.Query.Domain.Repositories;
 using Brete.Query.Infrastructure.DataAccess;
+using Microsoft.EntityFrameworkCore;
 
 namespace Brete.Query.Infrastructure.Repositories;
 
 public sealed class SkillRepository : ISkillRepository
 {
-    private readonly DatabaseContextFactory databaseContextFactory;
+    private readonly DatabaseContextFactory _contextFactory;
 
-    public SkillRepository(DatabaseContextFactory databaseContextFactory)
+    public SkillRepository(DatabaseContextFactory contextFactory)
     {
-        this.databaseContextFactory = databaseContextFactory;
+        _contextFactory = contextFactory;
     }
 
-    public Task CreateAsync(SkillEntity skill)
+    public async Task CreateAsync(SkillEntity skill)
     {
-        throw new NotImplementedException();
+        using DatabaseContext context = _contextFactory.CreateDbContext();
+        context.Add(skill);
+
+        await context.SaveChangesAsync();
     }
 
-    public Task DeleteAsync(Guid skillId)
+    public async Task DeleteAsync(SkillEntity skill)
     {
-        throw new NotImplementedException();
+        using DatabaseContext context = _contextFactory.CreateDbContext();
+        context.Update(skill);
+
+        await context.SaveChangesAsync();
     }
 
-    public Task DisableAsync(Guid skillId)
+    public async Task DisableAsync(SkillEntity skill)
     {
-        throw new NotImplementedException();
+        using DatabaseContext context = _contextFactory.CreateDbContext();
+        context.Update(skill);
+
+        await context.SaveChangesAsync();
     }
 
-    public Task<SkillEntity> GetByIdAsync(Guid skillId)
+    public async Task<SkillEntity> GetByIdAsync(Guid skillId)
     {
-        throw new NotImplementedException();
+        using DatabaseContext context = _contextFactory.CreateDbContext();
+        return await context.Skill
+                            .FirstOrDefaultAsync(skill => skill.Id == skillId);
+
     }
 
     public Task<List<SkillEntity>> ListAllAsync()
@@ -38,8 +51,11 @@ public sealed class SkillRepository : ISkillRepository
         throw new NotImplementedException();
     }
 
-    public Task UpdateAsync(SkillEntity skill)
+    public async Task UpdateAsync(SkillEntity skill)
     {
-        throw new NotImplementedException();
+        using DatabaseContext context = _contextFactory.CreateDbContext();
+        context.Update(skill);
+
+        await context.SaveChangesAsync();
     }
 }

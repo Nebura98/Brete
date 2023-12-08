@@ -5,8 +5,8 @@ public interface ISkillRepository
 {
     Task CreateAsync(SkillEntity skill);
     Task UpdateAsync(SkillEntity skill);
-    Task DisableAsync(Guid skillId);
-    Task DeleteAsync(Guid skillId);
+    Task DisableAsync(SkillEntity skill);
+    Task DeleteAsync(SkillEntity skill);
     Task<SkillEntity> GetByIdAsync(Guid skillId);
     Task<List<SkillEntity>> ListAllAsync();
 }

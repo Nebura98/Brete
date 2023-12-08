@@ -18,12 +18,12 @@ public class RemoveJobController : ControllerBase
         _logger = logger;
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> RemoveJobAsync(Guid JobId, RemoveJobCommand command)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> RemoveJobAsync(Guid id, RemoveJobCommand command)
     {
         try
         {
-            command.Id = JobId;
+            command.Id = id;
 
             await _commandDispatcher.SendAsync(command);
 

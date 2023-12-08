@@ -19,7 +19,7 @@ public class RemoveUserController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> RemoveUserAsync(Guid SkillId, RemoveSkillCommand command)
+    public async Task<IActionResult> RemoveUserAsync(Guid SkillId, DeleteSkillCommand command)
     {
         try
         {

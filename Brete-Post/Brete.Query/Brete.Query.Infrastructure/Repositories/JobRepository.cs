@@ -55,9 +55,12 @@ public class JobRepository : IJobRepository
         throw new NotImplementedException();
     }
 
-    public Task RemoveAsync(JobEntity job)
+    public async Task RemoveAsync(JobEntity job)
     {
-        throw new NotImplementedException();
+        using DatabaseContext context = _contextFactory.CreateDbContext();
+        context.Job.Remove(job);
+
+        _ = await context.SaveChangesAsync();
     }
 
     public async Task UpdateAsync(JobEntity job)

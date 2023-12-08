@@ -29,7 +29,6 @@ public class DatabaseContext : DbContext
         modelBuilder
             .Entity<CompanyEntity>()
             .Property(company => company.UpdatedAt)
-            .ValueGeneratedOnUpdate()
             .HasDefaultValueSql("now()");
 
         //For job
@@ -41,7 +40,6 @@ public class DatabaseContext : DbContext
         modelBuilder
             .Entity<JobEntity>()
             .Property(job => job.UpdatedAt)
-            .ValueGeneratedOnUpdate()
             .HasDefaultValueSql("now()");
 
         //For skill
@@ -53,7 +51,6 @@ public class DatabaseContext : DbContext
         modelBuilder
             .Entity<SkillEntity>()
             .Property(skill => skill.UpdatedAt)
-            .ValueGeneratedOnUpdate()
             .HasDefaultValueSql("now()");
 
         //For user
@@ -65,7 +62,6 @@ public class DatabaseContext : DbContext
         modelBuilder
             .Entity<UserEntity>()
             .Property(user => user.UpdatedAt)
-            .ValueGeneratedOnUpdate()
             .HasDefaultValueSql("now()");
     }
 

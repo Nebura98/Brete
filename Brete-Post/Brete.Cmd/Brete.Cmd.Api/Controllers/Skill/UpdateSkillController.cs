@@ -18,12 +18,12 @@ public class UpdateSkillController : ControllerBase
         _logger = logger;
     }
 
-    [HttpPatch]
-    public async Task<IActionResult> UpdateSkillAsync(Guid SkillId, UpdateSkillCommand command)
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> UpdateSkillAsync(Guid id, UpdateSkillCommand command)
     {
         try
         {
-            command.Id = SkillId;
+            command.Id = id;
 
             await _commandDispatcher.SendAsync(command);
 

@@ -1,4 +1,4 @@
-﻿using Brete.Cmd.Api.Commands.Job;
+﻿using Brete.Cmd.Api.Commands.Skill;
 using CQRS.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Post.Common.DTOs;
@@ -19,12 +19,12 @@ public class DisableSkillController : ControllerBase
         _logger = logger;
     }
 
-    [HttpPut]
-    public async Task<IActionResult> DisableSkillAsync(Guid JobId, DisableJobCommand command)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> DisableSkillAsync(Guid id, DisableSkillCommand command)
     {
         try
         {
-            command.Id = JobId;
+            command.Id = id;
 
             await _commandDispatcher.SendAsync(command);
 

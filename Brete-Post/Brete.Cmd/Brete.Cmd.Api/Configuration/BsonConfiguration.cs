@@ -16,6 +16,7 @@ public static class BsonConfiguration
         BsonClassMap.RegisterClassMap<JobUpdatedEvent>();
         BsonClassMap.RegisterClassMap<JobDisableEvent>();
         BsonClassMap.RegisterClassMap<JobDeletedEvent>();
+        BsonClassMap.RegisterClassMap<JobRemovedEvent>();
         BsonClassMap.RegisterClassMap<CompanyCreatedEvent>();
         BsonClassMap.RegisterClassMap<CompanyUpdatedEvent>();
         BsonClassMap.RegisterClassMap<CompanyDisableEvent>();
