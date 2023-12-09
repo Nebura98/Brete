@@ -7,7 +7,10 @@ public static class DatabaseConfiguration
 {
     public static WebApplicationBuilder ConfigurePostgresSQLDatabase(this WebApplicationBuilder builder)
     {
-        Action<DbContextOptionsBuilder> configureDbContext = options => options.UseLazyLoadingProxies().UseNpgsql(builder.Configuration.GetConnectionString("PostgresSQL"));
+        Action<DbContextOptionsBuilder> configureDbContext = options =>
+        {
+            options.UseLazyLoadingProxies().UseNpgsql(builder.Configuration.GetConnectionString("PostgresSQL"));
+        };
         builder.Services.AddDbContext<DatabaseContext>(configureDbContext);
         builder.Services.AddSingleton(new DatabaseContextFactory(configureDbContext));
 
@@ -17,4 +20,16 @@ public static class DatabaseConfiguration
 
         return builder;
     }
+
+
+    public static WebApplicationBuilder ConfigureRedisDatabase(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddStackExchangeRedisCache(options =>
+        {
+            string connection = builder.Configuration.GetConnectionString("RedisConnection");
+            options.Configuration = connection;
+        });
+        return builder;
+    }
+
 }

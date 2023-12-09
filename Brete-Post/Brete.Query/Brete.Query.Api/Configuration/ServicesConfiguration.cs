@@ -17,6 +17,7 @@ public static class ServicesConfiguration
         builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
         builder.Services.AddScoped<IJobRepository, JobRepository>();
         builder.Services.AddScoped<ISkillRepository, SkillRepository>();
+        builder.Services.AddScoped<ISkillRepository, CachedSkillRepository>();
         builder.Services.AddScoped<IQueryHandler, QueryHandler>();
         builder.Services.AddScoped<IEventHandler, EventHandler>();
         builder.Services.Configure<ConsumerConfig>(builder.Configuration.GetSection(nameof(ConsumerConfig)));

@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.ConfigurePostgresSQLDatabase();
+builder.ConfigureRedisDatabase();
 
 //Load Services
 builder.ConfigureService();

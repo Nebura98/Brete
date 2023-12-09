@@ -38,7 +38,7 @@ public sealed class SkillRepository : ISkillRepository
         await context.SaveChangesAsync();
     }
 
-    public async Task<SkillEntity> GetByIdAsync(Guid skillId)
+    public async Task<SkillEntity?> GetByIdAsync(Guid skillId)
     {
         using DatabaseContext context = _contextFactory.CreateDbContext();
         return await context.Skill

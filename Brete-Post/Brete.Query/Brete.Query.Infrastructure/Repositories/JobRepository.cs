@@ -1,5 +1,6 @@
 ﻿using Brete.Query.Domain.Entities;
 using Brete.Query.Domain.Repositories;
+using Brete.Query.Infrastructure.Caching;
 using Brete.Query.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,10 +9,12 @@ namespace Brete.Query.Infrastructure.Repositories;
 public class JobRepository : IJobRepository
 {
     private readonly DatabaseContextFactory _contextFactory;
+    private readonly CacheService _cacheService;
 
-    public JobRepository(DatabaseContextFactory contextFactory)
+    public JobRepository(DatabaseContextFactory contextFactory, CacheService cacheService)
     {
         _contextFactory = contextFactory;
+        _cacheService = cacheService;
     }
 
     public async Task CreateAsync(JobEntity job)
