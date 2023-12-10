@@ -1,14 +1,9 @@
 ﻿using Brete.Query.Domain.Entities;
+using CQRS.Core.Infrastructure;
 
 namespace Brete.Query.Domain.Repositories;
 
-public interface ICompanyRepository
+public interface ICompanyRepository : IBaseRepository<CompanyEntity>
 {
-    Task CreateAsync(CompanyEntity company);
-    Task UpdateAsync(CompanyEntity company);
-    Task DisableAsync(Guid companyId);
-    Task DeleteAsync(Guid companyId);
-    Task GetByIdAsync(Guid companyId);
-    Task<List<CompanyEntity>> ListAllAsync();
     Task<List<CompanyEntity>> SearchByCriteriaAsync();
 }

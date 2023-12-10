@@ -7,19 +7,19 @@ namespace Brete.Cmd.Api.Controllers.Company;
 
 [Route("api/[controller]")]
 [ApiController]
-public class RemoveCompanyController : ControllerBase
+public class DeleteCompanyController : ControllerBase
 {
-    private readonly ILogger<RemoveCompanyController> _logger;
+    private readonly ILogger<DeleteCompanyController> _logger;
     private readonly ICommandDispatcher _commandDispatcher;
 
-    public RemoveCompanyController(ICommandDispatcher commandDispatcher, ILogger<RemoveCompanyController> logger)
+    public DeleteCompanyController(ICommandDispatcher commandDispatcher, ILogger<DeleteCompanyController> logger)
     {
         _commandDispatcher = commandDispatcher;
         _logger = logger;
     }
 
     [HttpDelete]
-    public async Task<IActionResult> RemoveCompanyAsync(Guid CompanyId, RemoveCompanyCommand command)
+    public async Task<IActionResult> RemoveCompanyAsync(Guid CompanyId, DeleteCompanyCommand command)
     {
         try
         {

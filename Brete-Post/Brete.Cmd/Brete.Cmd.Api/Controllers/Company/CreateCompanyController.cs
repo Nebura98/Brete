@@ -23,7 +23,7 @@ public class CreateCompanyController : ControllerBase
     {
         try
         {
-            command.Id = Guid.NewGuid();
+
             await _commandDispatcher.SendAsync(command);
 
             return Ok(new BaseResponse

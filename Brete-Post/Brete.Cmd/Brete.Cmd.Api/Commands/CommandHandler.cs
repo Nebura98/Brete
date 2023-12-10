@@ -1,5 +1,7 @@
-﻿using Brete.Cmd.Api.Commands.Job;
+﻿using Brete.Cmd.Api.Commands.Company;
+using Brete.Cmd.Api.Commands.Job;
 using Brete.Cmd.Api.Commands.Skill;
+using Brete.Cmd.Domain.Aggregates.CompanyAggregate;
 using Brete.Cmd.Domain.Aggregates.JobAggregate;
 using Brete.Cmd.Domain.Aggregates.SkillAggregate;
 using CQRS.Core.Handlers;
@@ -8,36 +10,49 @@ namespace Brete.Cmd.Api.Commands;
 
 public class CommandHandler : ICommandHandler
 {
-    //private readonly IEventSourcingHandler<CompanyAggregate> _companyEventSourcingHandler;
+    private readonly IEventSourcingHandler<CompanyAggregate> _companyEventSourcingHandler;
     private readonly IEventSourcingHandler<JobAggregate> _jobEventSourcingHandler;
     private readonly IEventSourcingHandler<SkillAggregate> _skillEventSourcingHandler;
     public CommandHandler(IEventSourcingHandler<JobAggregate> eventSourcingHandler,
-                          IEventSourcingHandler<SkillAggregate> skillEventSourcingHandler)
+                          IEventSourcingHandler<SkillAggregate> skillEventSourcingHandler,
+                          IEventSourcingHandler<CompanyAggregate> companyEventSourcingHandler)
     {
         _jobEventSourcingHandler = eventSourcingHandler;
         _skillEventSourcingHandler = skillEventSourcingHandler;
+        _companyEventSourcingHandler = companyEventSourcingHandler;
     }
 
 
-    //public Task HandleAsync(CreateCompanyCommand command)
-    //{
-    //    throw new NotImplementedException();
-    //}
+    public async Task HandleAsync(CreateCompanyCommand command)
+    {
+        var aggregate = new CompanyAggregate(command.Id,
+                                             command.Name,
+                                             command.LegalName,
+                                             command.Address,
+                                             command.Phone,
+                                             command.Email,
+                                             command.Website,
+                                             command.Industry,
+                                             command.Size,
+                                             command.FoundingDate);
 
-    //public Task HandleAsync(UpdateCompanyCommand command)
-    //{
-    //    throw new NotImplementedException();
-    //}
+        await _companyEventSourcingHandler.SaveAsync(aggregate);
+    }
 
-    //public Task HandleAsync(DisableCompanyCommand command)
-    //{
-    //    throw new NotImplementedException();
-    //}
+    public Task HandleAsync(UpdateCompanyCommand command)
+    {
+        throw new NotImplementedException();
+    }
 
-    //public Task HandleAsync(RemoveCompanyCommand command)
-    //{
-    //    throw new NotImplementedException();
-    //}
+    public Task HandleAsync(DisableCompanyCommand command)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task HandleAsync(DeleteCompanyCommand command)
+    {
+        throw new NotImplementedException();
+    }
 
     public async Task HandleAsync(CreateJobCommand command)
     {

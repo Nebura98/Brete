@@ -10,6 +10,7 @@ builder.ConfigureRedisDatabase();
 
 //Load Services
 builder.ConfigureService();
+builder.ConfigureCacheRepository();
 
 //Load Queries
 builder.ConfigureQuery();

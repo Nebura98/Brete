@@ -2,6 +2,6 @@
 
 namespace Brete.Cmd.Api.Commands.Company;
 
-public record RemoveCompanyCommand : BaseCommand
+public record DeleteCompanyCommand : BaseCommand
 {
 }

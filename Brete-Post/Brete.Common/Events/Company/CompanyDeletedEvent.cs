@@ -2,9 +2,9 @@
 
 namespace Brete.Common.Events.Company;
 
-public sealed record CompanyRemovedEvent : BaseEvent
+public sealed record CompanyDeletedEvent : BaseEvent
 {
-    public CompanyRemovedEvent() : base(nameof(CompanyRemovedEvent))
+    public CompanyDeletedEvent() : base(nameof(CompanyDeletedEvent))
     {
     }
     public bool IsActive { get; set; }

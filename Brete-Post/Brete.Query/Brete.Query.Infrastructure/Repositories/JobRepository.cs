@@ -1,20 +1,18 @@
 ﻿using Brete.Query.Domain.Entities;
 using Brete.Query.Domain.Repositories;
-using Brete.Query.Infrastructure.Caching;
 using Brete.Query.Infrastructure.DataAccess;
+using CQRS.Core.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace Brete.Query.Infrastructure.Repositories;
 
-public class JobRepository : IJobRepository
+public class JobRepository : IJobRepository, ISQLRepository<JobEntity>
 {
     private readonly DatabaseContextFactory _contextFactory;
-    private readonly CacheService _cacheService;
 
-    public JobRepository(DatabaseContextFactory contextFactory, CacheService cacheService)
+    public JobRepository(DatabaseContextFactory contextFactory)
     {
         _contextFactory = contextFactory;
-        _cacheService = cacheService;
     }
 
     public async Task CreateAsync(JobEntity job)
@@ -41,14 +39,24 @@ public class JobRepository : IJobRepository
         _ = await context.SaveChangesAsync();
     }
 
-    public async Task<JobEntity> GetByIdAsync(Guid jobId)
+    public async Task<JobEntity?> GetByIdAsync(Guid jobId)
     {
         using DatabaseContext context = _contextFactory.CreateDbContext();
         return await context.Job
                     .FirstOrDefaultAsync(job => job.Id == jobId);
     }
 
+    public Task<bool> HasValueInDatabaseAsync(JobEntity value)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<List<JobEntity>> ListAllAsync(Guid jobId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<JobEntity?>> ListAllAsync()
     {
         throw new NotImplementedException();
     }

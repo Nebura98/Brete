@@ -15,9 +15,13 @@ public class CachedSkillRepository : ISkillRepository
         _distributedCache = distributedCache;
     }
 
-    public Task CreateAsync(SkillEntity skill)
+    public async Task CreateAsync(SkillEntity skill)
     {
-        return _decorated.CreateAsync(skill);
+        string key = $"skill-{skill.Id}";
+
+        await _distributedCache.SetStringAsync(key, JsonSerializer.Serialize(skill));
+
+        await _decorated.CreateAsync(skill);
     }
 
     public Task DeleteAsync(SkillEntity skill)
@@ -54,7 +58,7 @@ public class CachedSkillRepository : ISkillRepository
         return skill;
     }
 
-    public Task<List<SkillEntity>> ListAllAsync()
+    public Task<List<SkillEntity?>> ListAllAsync()
     {
         throw new NotImplementedException();
     }

@@ -1,4 +1,5 @@
-﻿using Brete.Common.Events.Job;
+﻿using Brete.Common.Events.Company;
+using Brete.Common.Events.Job;
 using Brete.Common.Events.Skill;
 using Brete.Query.Domain.Entities;
 using Brete.Query.Domain.Repositories;
@@ -7,15 +8,55 @@ namespace Brete.Query.Infrastructure.Handlers;
 
 public class EventHandler : IEventHandler
 {
+    private readonly ICompanyRepository _cacheCompanyRepository;
     private readonly IJobRepository _jobRepository;
-    private readonly ISkillRepository _skillRepository;
+    private readonly ISkillRepository _cacheSkillRepository;
 
-    public EventHandler(IJobRepository jobRepository, ISkillRepository skillRepository)
+    public EventHandler(IJobRepository jobRepository,
+                        ISkillRepository cacheSkillRepository,
+                        ICompanyRepository cacheCompanyRepository)
     {
         _jobRepository = jobRepository;
-        _skillRepository = skillRepository;
+        _cacheSkillRepository = cacheSkillRepository;
+        _cacheCompanyRepository = cacheCompanyRepository;
     }
 
+    //Company
+    public async Task On(CompanyCreatedEvent @event)
+    {
+        var company = new CompanyEntity
+        {
+            Id = @event.Id,
+            Name = @event.Name,
+            LegalName = @event.LegalName,
+            Address = @event.Address,
+            Phone = @event.Phone,
+            Email = @event.Email,
+            Website = @event.Website,
+            Industry = @event.Industry,
+            Size = @event.Size,
+            FoundingDate = DateTime.UtcNow,
+        };
+
+        await _cacheCompanyRepository.CreateAsync(company);
+    }
+
+    public Task On(CompanyDisableEvent @event)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task On(CompanyUpdatedEvent @event)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task On(CompanyDeletedEvent @event)
+    {
+        throw new NotImplementedException();
+    }
+
+    //Job
     public async Task On(JobCreatedEvent @event)
     {
         var job = new JobEntity
@@ -94,12 +135,12 @@ public class EventHandler : IEventHandler
             Section = @event.Section
         };
 
-        await _skillRepository.CreateAsync(skill);
+        await _cacheSkillRepository.CreateAsync(skill);
     }
 
     public async Task On(SkillUpdatedEvent @event)
     {
-        var skill = await _skillRepository.GetByIdAsync(@event.Id);
+        var skill = await _cacheSkillRepository.GetByIdAsync(@event.Id);
 
         if (skill == null) return;
 
@@ -108,29 +149,28 @@ public class EventHandler : IEventHandler
         skill.Section = @event.Section;
         skill.UpdatedAt = DateTime.UtcNow;
 
-        await _skillRepository.UpdateAsync(skill);
+        await _cacheSkillRepository.UpdateAsync(skill);
     }
 
     public async Task On(SkillDisableEvent @event)
     {
-        var skill = await _skillRepository.GetByIdAsync(@event.Id);
+        var skill = await _cacheSkillRepository.GetByIdAsync(@event.Id);
 
         if (skill == null) return;
 
         skill.IsActive = @event.IsDisable;
 
-        await _skillRepository.DisableAsync(skill);
+        await _cacheSkillRepository.DisableAsync(skill);
     }
 
     public async Task On(SkillDeletedEvent @event)
     {
-        var skill = await _skillRepository.GetByIdAsync(@event.Id);
+        var skill = await _cacheSkillRepository.GetByIdAsync(@event.Id);
 
         if (skill == null) return;
 
         skill.IsDeleted = @event.IsDeleted;
 
-        await _skillRepository.DeleteAsync(skill);
+        await _cacheSkillRepository.DeleteAsync(skill);
     }
-
 }

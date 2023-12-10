@@ -20,7 +20,7 @@ public static class BsonConfiguration
         BsonClassMap.RegisterClassMap<CompanyCreatedEvent>();
         BsonClassMap.RegisterClassMap<CompanyUpdatedEvent>();
         BsonClassMap.RegisterClassMap<CompanyDisableEvent>();
-        BsonClassMap.RegisterClassMap<CompanyRemovedEvent>();
+        BsonClassMap.RegisterClassMap<CompanyDeletedEvent>();
         BsonClassMap.RegisterClassMap<SkillCreatedEvent>();
         BsonClassMap.RegisterClassMap<SkillUpdatedEvent>();
         BsonClassMap.RegisterClassMap<SkillDisableEvent>();

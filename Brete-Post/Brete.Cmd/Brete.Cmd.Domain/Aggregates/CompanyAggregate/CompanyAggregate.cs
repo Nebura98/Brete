@@ -12,10 +12,11 @@ public sealed class CompanyAggregate : AggregateRoot
     {
     }
 
-    public CompanyAggregate(string name, string legalName, string address, string phone, string email, string website, string industry, string size, DateOnly foundingDate, string status, bool isActive)
+    public CompanyAggregate(Guid companyId, string name, string legalName, string address, string phone, string email, string website, string industry, string size, DateTime foundingDate)
     {
         RaiseEvent(new CompanyCreatedEvent
         {
+            Id = companyId,
             Name = name,
             LegalName = legalName,
             Address = address,
@@ -25,9 +26,6 @@ public sealed class CompanyAggregate : AggregateRoot
             Industry = industry,
             Size = size,
             FoundingDate = foundingDate,
-            Status = status,
-            IsActive = isActive
-
         });
     }
 
@@ -80,13 +78,13 @@ public sealed class CompanyAggregate : AggregateRoot
     public void RemoveCompany(Guid companyId)
     {
         RaiseEvent(
-            new CompanyRemovedEvent
+            new CompanyDeletedEvent
             {
                 Id = companyId
             });
     }
 
-    public void Apply(CompanyRemovedEvent @event)
+    public void Apply(CompanyDeletedEvent @event)
     {
         _id = @event.Id;
         _active = true;

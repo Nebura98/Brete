@@ -1,14 +1,10 @@
 ﻿using Brete.Query.Domain.Entities;
+using CQRS.Core.Infrastructure;
 
 namespace Brete.Query.Domain.Repositories;
 
-public interface IJobRepository
+public interface IJobRepository : IBaseRepository<JobEntity>
 {
-    Task CreateAsync(JobEntity job);
-    Task UpdateAsync(JobEntity job);
-    Task DisableAsync(JobEntity job);
-    Task DeleteAsync(JobEntity job);
     Task RemoveAsync(JobEntity job);
-    Task<JobEntity> GetByIdAsync(Guid jobId);
     Task<List<JobEntity>> ListAllAsync(Guid jobId);
 }

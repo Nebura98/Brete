@@ -1,11 +1,12 @@
 ﻿using Brete.Query.Domain.Entities;
 using Brete.Query.Domain.Repositories;
 using Brete.Query.Infrastructure.DataAccess;
+using CQRS.Core.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace Brete.Query.Infrastructure.Repositories;
 
-public sealed class SkillRepository : ISkillRepository
+public sealed class SkillRepository : ISkillRepository, ISQLRepository<string>
 {
     private readonly DatabaseContextFactory _contextFactory;
 
@@ -17,7 +18,16 @@ public sealed class SkillRepository : ISkillRepository
     public async Task CreateAsync(SkillEntity skill)
     {
         using DatabaseContext context = _contextFactory.CreateDbContext();
-        context.Add(skill);
+
+        var doesExist = await HasValueInDatabaseAsync(skill.Name);
+
+        if (doesExist)
+        {
+            Console.WriteLine("Content already exist");
+            return;
+        }
+
+        _ = context.Skill.Add(skill);
 
         await context.SaveChangesAsync();
     }
@@ -46,7 +56,14 @@ public sealed class SkillRepository : ISkillRepository
 
     }
 
-    public Task<List<SkillEntity>> ListAllAsync()
+    public async Task<bool> HasValueInDatabaseAsync(string name)
+    {
+        using DatabaseContext context = _contextFactory.CreateDbContext();
+
+        return await context.Skill.AnyAsync(s => s.Name == name);
+    }
+
+    public Task<List<SkillEntity?>> ListAllAsync()
     {
         throw new NotImplementedException();
     }

@@ -1,25 +1,23 @@
 ﻿using Brete.Query.Domain.Entities;
 using Brete.Query.Domain.Repositories;
-using Brete.Query.Infrastructure.DataAccess;
-using CQRS.Core.Infrastructure;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Brete.Query.Infrastructure.Repositories;
 
-public class CompanyRepository : ICompanyRepository, ISQLRepository<CompanyEntity>
+public class CachedCompanyRepository : ICompanyRepository
 {
-    private readonly DatabaseContextFactory _databaseContextFactory;
+    private readonly ICompanyRepository _decorated;
+    private readonly IDistributedCache _distributedCache;
 
-    public CompanyRepository(DatabaseContextFactory databaseContextFactory)
+    public CachedCompanyRepository(ICompanyRepository decorated, IDistributedCache distributedCache)
     {
-        _databaseContextFactory = databaseContextFactory;
+        _decorated = decorated;
+        _distributedCache = distributedCache;
     }
 
     public async Task CreateAsync(CompanyEntity company)
     {
-        using DatabaseContext context = _databaseContextFactory.CreateDbContext();
-        context.Company.Add(company);
-
-        _ = await context.SaveChangesAsync();
+        await _decorated.CreateAsync(company);
     }
 
     public Task DeleteAsync(CompanyEntity value)
@@ -33,11 +31,6 @@ public class CompanyRepository : ICompanyRepository, ISQLRepository<CompanyEntit
     }
 
     public Task<CompanyEntity?> GetByIdAsync(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> HasValueInDatabaseAsync(CompanyEntity value)
     {
         throw new NotImplementedException();
     }

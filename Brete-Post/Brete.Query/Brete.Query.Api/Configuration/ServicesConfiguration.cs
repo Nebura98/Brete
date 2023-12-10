@@ -17,11 +17,18 @@ public static class ServicesConfiguration
         builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
         builder.Services.AddScoped<IJobRepository, JobRepository>();
         builder.Services.AddScoped<ISkillRepository, SkillRepository>();
-        builder.Services.AddScoped<ISkillRepository, CachedSkillRepository>();
         builder.Services.AddScoped<IQueryHandler, QueryHandler>();
         builder.Services.AddScoped<IEventHandler, EventHandler>();
         builder.Services.Configure<ConsumerConfig>(builder.Configuration.GetSection(nameof(ConsumerConfig)));
         builder.Services.AddScoped<IEventConsumer, EventConsumer>();
+
+        return builder;
+    }
+
+    public static WebApplicationBuilder ConfigureCacheRepository(this WebApplicationBuilder builder)
+    {
+        builder.Services.Decorate<ICompanyRepository, CachedCompanyRepository>();
+        builder.Services.Decorate<ISkillRepository, CachedSkillRepository>();
 
         return builder;
     }

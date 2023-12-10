@@ -1,4 +1,5 @@
 ﻿using Brete.Cmd.Api.Commands;
+using Brete.Cmd.Domain.Aggregates.CompanyAggregate;
 using Brete.Cmd.Domain.Aggregates.JobAggregate;
 using Brete.Cmd.Domain.Aggregates.SkillAggregate;
 using Brete.Cmd.Infrastructure.Handlers;
@@ -21,7 +22,7 @@ public static class ServicesConfiguration
         services.AddScoped<IEventStore, EventStore>();
         services.AddScoped<IEventSourcingHandler<JobAggregate>, JobEventSourcingHandler>();
         services.AddScoped<IEventSourcingHandler<SkillAggregate>, SkillEventSourcingHandler>();
-        //services.AddScoped<IEventSourcingHandler<CompanyAggregate>, CompanyEventSourcingHandler>();
+        services.AddScoped<IEventSourcingHandler<CompanyAggregate>, CompanyEventSourcingHandler>();
         services.AddScoped<ICommandHandler, CommandHandler>();
 
         return services;

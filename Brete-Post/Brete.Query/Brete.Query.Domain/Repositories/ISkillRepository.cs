@@ -1,13 +1,8 @@
 ﻿using Brete.Query.Domain.Entities;
+using CQRS.Core.Infrastructure;
 
 namespace Brete.Query.Domain.Repositories;
-public interface ISkillRepository
+public interface ISkillRepository : IBaseRepository<SkillEntity>
 {
-    Task CreateAsync(SkillEntity skill);
-    Task UpdateAsync(SkillEntity skill);
-    Task DisableAsync(SkillEntity skill);
-    Task DeleteAsync(SkillEntity skill);
-    Task<SkillEntity?> GetByIdAsync(Guid skillId);
-    Task<List<SkillEntity>> ListAllAsync();
 }
 

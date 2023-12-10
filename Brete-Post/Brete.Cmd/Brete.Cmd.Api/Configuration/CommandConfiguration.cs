@@ -1,4 +1,5 @@
 ﻿using Brete.Cmd.Api.Commands;
+using Brete.Cmd.Api.Commands.Company;
 using Brete.Cmd.Api.Commands.Job;
 using Brete.Cmd.Api.Commands.Skill;
 using Brete.Cmd.Infrastructure.Dispatchers;
@@ -14,10 +15,10 @@ public static class CommandConfiguration
 
         CommandDispatcher dispatcher = new();
 
-        //dispatcher.RegisterHandler<CreateCompanyCommand>(commandHandler.HandleAsync);
-        //dispatcher.RegisterHandler<UpdateCompanyCommand>(commandHandler.HandleAsync);
-        //dispatcher.RegisterHandler<DisableCompanyCommand>(commandHandler.HandleAsync);
-        //dispatcher.RegisterHandler<RemoveCompanyCommand>(commandHandler.HandleAsync);
+        dispatcher.RegisterHandler<CreateCompanyCommand>(commandHandler.HandleAsync);
+        dispatcher.RegisterHandler<UpdateCompanyCommand>(commandHandler.HandleAsync);
+        dispatcher.RegisterHandler<DisableCompanyCommand>(commandHandler.HandleAsync);
+        dispatcher.RegisterHandler<DeleteCompanyCommand>(commandHandler.HandleAsync);
         dispatcher.RegisterHandler<CreateJobCommand>(commandHandler.HandleAsync);
         dispatcher.RegisterHandler<UpdateJobCommand>(commandHandler.HandleAsync);
         dispatcher.RegisterHandler<DisableJobCommand>(commandHandler.HandleAsync);

@@ -1,4 +1,5 @@
-﻿using Brete.Cmd.Api.Commands.Job;
+﻿using Brete.Cmd.Api.Commands.Company;
+using Brete.Cmd.Api.Commands.Job;
 using Brete.Cmd.Api.Commands.Skill;
 
 namespace Brete.Cmd.Api.Commands;
@@ -6,10 +7,10 @@ namespace Brete.Cmd.Api.Commands;
 public interface ICommandHandler
 {
 
-    //Task HandleAsync(CreateCompanyCommand command);
-    //Task HandleAsync(UpdateCompanyCommand command);
-    //Task HandleAsync(DisableCompanyCommand command);
-    //Task HandleAsync(RemoveCompanyCommand command);
+    Task HandleAsync(CreateCompanyCommand command);
+    Task HandleAsync(UpdateCompanyCommand command);
+    Task HandleAsync(DisableCompanyCommand command);
+    Task HandleAsync(DeleteCompanyCommand command);
     Task HandleAsync(CreateJobCommand command);
     Task HandleAsync(UpdateJobCommand command);
     Task HandleAsync(DisableJobCommand command);
