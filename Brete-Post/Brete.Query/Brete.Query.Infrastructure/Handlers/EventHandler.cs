@@ -1,8 +1,12 @@
 ﻿using Brete.Common.Events.Company;
 using Brete.Common.Events.Job;
 using Brete.Common.Events.Skill;
+using Brete.Common.Events.User;
 using Brete.Query.Domain.Entities;
 using Brete.Query.Domain.Repositories;
+using BC = BCrypt.Net.BCrypt;
+
+
 
 namespace Brete.Query.Infrastructure.Handlers;
 
@@ -11,14 +15,18 @@ public class EventHandler : IEventHandler
     private readonly ICompanyRepository _cacheCompanyRepository;
     private readonly IJobRepository _jobRepository;
     private readonly ISkillRepository _cacheSkillRepository;
+    private readonly IUserRepository _userRepository;
 
-    public EventHandler(IJobRepository jobRepository,
-                        ISkillRepository cacheSkillRepository,
-                        ICompanyRepository cacheCompanyRepository)
+    public EventHandler(
+        IJobRepository jobRepository,
+        ISkillRepository cacheSkillRepository,
+        ICompanyRepository cacheCompanyRepository,
+        IUserRepository userRepository)
     {
         _jobRepository = jobRepository;
         _cacheSkillRepository = cacheSkillRepository;
         _cacheCompanyRepository = cacheCompanyRepository;
+        _userRepository = userRepository;
     }
 
     //Company
@@ -41,19 +49,45 @@ public class EventHandler : IEventHandler
         await _cacheCompanyRepository.CreateAsync(company);
     }
 
-    public Task On(CompanyDisableEvent @event)
+    public async Task On(CompanyUpdatedEvent @event)
     {
-        throw new NotImplementedException();
+        var company = await _cacheCompanyRepository.GetByIdAsync(@event.Id);
+
+        if (company is null) return;
+
+        company.Name = @event.Name;
+        company.LegalName = @event.LegalName;
+        company.Address = @event.Address;
+        company.Phone = @event.Phone;
+        company.Email = @event.Email;
+        company.Website = @event.Website;
+        company.Industry = @event.Industry;
+        company.Size = @event.Size;
+        company.FoundingDate = DateTime.UtcNow;
+
+        await _cacheCompanyRepository.UpdateAsync(company);
     }
 
-    public Task On(CompanyUpdatedEvent @event)
+    public async Task On(CompanyDisableEvent @event)
     {
-        throw new NotImplementedException();
+        var company = await _cacheCompanyRepository.GetByIdAsync(@event.Id);
+
+        if (company is null) return;
+
+        company.IsActive = @event.IsActive;
+
+        await _cacheCompanyRepository.DisableAsync(company);
     }
 
-    public Task On(CompanyDeletedEvent @event)
+    public async Task On(CompanyDeletedEvent @event)
     {
-        throw new NotImplementedException();
+        var company = await _cacheCompanyRepository.GetByIdAsync(@event.Id);
+
+        if (company is null) return;
+
+        company.IsDeleted = @event.IsDeleted;
+
+        await _cacheCompanyRepository.DeleteAsync(company);
     }
 
     //Job
@@ -79,7 +113,7 @@ public class EventHandler : IEventHandler
     {
         var job = await _jobRepository.GetByIdAsync(@event.Id);
 
-        if (job == null) return;
+        if (job is null) return;
 
         job.Title = @event.Title;
         job.Slug = @event.Slug;
@@ -97,7 +131,7 @@ public class EventHandler : IEventHandler
     {
         var job = await _jobRepository.GetByIdAsync(@event.Id);
 
-        if (job == null) return;
+        if (job is null) return;
 
         job.IsActive = @event.IsOpen;
 
@@ -108,7 +142,7 @@ public class EventHandler : IEventHandler
     {
         var job = await _jobRepository.GetByIdAsync(@event.Id);
 
-        if (job == null) return;
+        if (job is null) return;
 
         job.IsDeleted = true;
 
@@ -119,7 +153,7 @@ public class EventHandler : IEventHandler
     {
         var job = await _jobRepository.GetByIdAsync(@event.Id);
 
-        if (job == null) return;
+        if (job is null) return;
 
         await _jobRepository.RemoveAsync(job);
     }
@@ -142,7 +176,7 @@ public class EventHandler : IEventHandler
     {
         var skill = await _cacheSkillRepository.GetByIdAsync(@event.Id);
 
-        if (skill == null) return;
+        if (skill is null) return;
 
         skill.Name = @event.Name;
         skill.Description = @event.Description;
@@ -156,7 +190,7 @@ public class EventHandler : IEventHandler
     {
         var skill = await _cacheSkillRepository.GetByIdAsync(@event.Id);
 
-        if (skill == null) return;
+        if (skill is null) return;
 
         skill.IsActive = @event.IsDisable;
 
@@ -167,10 +201,41 @@ public class EventHandler : IEventHandler
     {
         var skill = await _cacheSkillRepository.GetByIdAsync(@event.Id);
 
-        if (skill == null) return;
+        if (skill is null) return;
 
         skill.IsDeleted = @event.IsDeleted;
 
         await _cacheSkillRepository.DeleteAsync(skill);
+    }
+
+    public async Task On(UserCreatedEvent @event)
+    {
+        var hashedPassword = BC.HashPassword(@event.Password, workFactor: 10);
+
+        var user = new UserEntity
+        {
+            Id = @event.Id,
+            FullName = @event.FullName,
+            UserName = @event.UserName,
+            Email = @event.Email,
+            Password = hashedPassword,
+            PhoneNumber = @event.PhoneNumber
+        };
+
+        await _userRepository.CreateAsync(user);
+    }
+
+    public async Task On(UserUpdatedEvent @event)
+    {
+    }
+
+    public async Task On(UserUpdatedPasswordEvent @event)
+    {
+    }
+    public async Task On(UserDisableEvent @event)
+    {
+    }
+    public async Task On(UserDeletedEvent @event)
+    {
     }
 }

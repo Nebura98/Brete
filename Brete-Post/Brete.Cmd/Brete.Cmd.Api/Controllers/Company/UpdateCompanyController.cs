@@ -18,12 +18,12 @@ public class UpdateCompanyController : ControllerBase
         _logger = logger;
     }
 
-    [HttpPatch]
-    public async Task<IActionResult> UpdateCompanyAsync(Guid CompanyId, UpdateCompanyCommand command)
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> UpdateCompanyAsync(Guid id, UpdateCompanyCommand command)
     {
         try
         {
-            command.Id = CompanyId;
+            command.Id = id;
 
             await _commandDispatcher.SendAsync(command);
 

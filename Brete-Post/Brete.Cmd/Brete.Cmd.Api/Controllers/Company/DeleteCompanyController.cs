@@ -18,12 +18,12 @@ public class DeleteCompanyController : ControllerBase
         _logger = logger;
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> RemoveCompanyAsync(Guid CompanyId, DeleteCompanyCommand command)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> RemoveCompanyAsync(Guid id, DeleteCompanyCommand command)
     {
         try
         {
-            command.Id = CompanyId;
+            command.Id = id;
 
             await _commandDispatcher.SendAsync(command);
 

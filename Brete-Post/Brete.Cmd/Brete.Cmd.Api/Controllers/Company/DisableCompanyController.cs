@@ -19,12 +19,12 @@ public class DisableCompanyController : ControllerBase
         _logger = logger;
     }
 
-    [HttpPut]
-    public async Task<IActionResult> DisableCompanyAsync(Guid JobId, DisableCompanyCommand command)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> DisableCompanyAsync(Guid id, DisableCompanyCommand command)
     {
         try
         {
-            command.Id = JobId;
+            command.Id = id;
 
             await _commandDispatcher.SendAsync(command);
 

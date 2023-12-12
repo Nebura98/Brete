@@ -1,4 +1,5 @@
-﻿using Brete.Common.Events.Company;
+﻿using Brete.Cmd.Api.Commands;
+using Brete.Common.Events.Company;
 using Brete.Common.Events.Job;
 using Brete.Common.Events.Skill;
 using Brete.Common.Events.User;
@@ -27,9 +28,9 @@ public static class BsonConfiguration
         BsonClassMap.RegisterClassMap<SkillDeletedEvent>();
         BsonClassMap.RegisterClassMap<UserCreatedEvent>();
         BsonClassMap.RegisterClassMap<UserUpdatedEvent>();
-        BsonClassMap.RegisterClassMap<UserDisableEvent>();
-        BsonClassMap.RegisterClassMap<UserDeletedEvent>();
-        BsonClassMap.RegisterClassMap<UserUpdatedPasswordEvent>();
+        BsonClassMap.RegisterClassMap<DisableUserCommand>();
+        BsonClassMap.RegisterClassMap<DeleteUserCommand>();
+        BsonClassMap.RegisterClassMap<UpdatePasswordUserCommand>();
         BsonClassMap.RegisterClassMap<UserResetPasswordEvent>();
     }
 

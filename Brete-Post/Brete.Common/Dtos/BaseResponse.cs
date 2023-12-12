@@ -1,6 +1,6 @@
 namespace Post.Common.DTOs;
 
-public class BaseResponse
+public record BaseResponse
 {
     public required string Message { get; set; }
 }

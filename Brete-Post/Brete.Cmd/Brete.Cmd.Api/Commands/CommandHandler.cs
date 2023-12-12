@@ -1,9 +1,11 @@
 ﻿using Brete.Cmd.Api.Commands.Company;
 using Brete.Cmd.Api.Commands.Job;
 using Brete.Cmd.Api.Commands.Skill;
+using Brete.Cmd.Api.Commands.User;
 using Brete.Cmd.Domain.Aggregates.CompanyAggregate;
 using Brete.Cmd.Domain.Aggregates.JobAggregate;
 using Brete.Cmd.Domain.Aggregates.SkillAggregate;
+using Brete.Cmd.Domain.Aggregates.UserAggregate;
 using CQRS.Core.Handlers;
 
 namespace Brete.Cmd.Api.Commands;
@@ -13,13 +15,18 @@ public class CommandHandler : ICommandHandler
     private readonly IEventSourcingHandler<CompanyAggregate> _companyEventSourcingHandler;
     private readonly IEventSourcingHandler<JobAggregate> _jobEventSourcingHandler;
     private readonly IEventSourcingHandler<SkillAggregate> _skillEventSourcingHandler;
-    public CommandHandler(IEventSourcingHandler<JobAggregate> eventSourcingHandler,
-                          IEventSourcingHandler<SkillAggregate> skillEventSourcingHandler,
-                          IEventSourcingHandler<CompanyAggregate> companyEventSourcingHandler)
+    private readonly IEventSourcingHandler<UserAggregate> _userEventSourcingHandler;
+
+    public CommandHandler(
+        IEventSourcingHandler<JobAggregate> eventSourcingHandler,
+        IEventSourcingHandler<SkillAggregate> skillEventSourcingHandler,
+        IEventSourcingHandler<CompanyAggregate> companyEventSourcingHandler,
+        IEventSourcingHandler<UserAggregate> userEventSourcingHandler)
     {
         _jobEventSourcingHandler = eventSourcingHandler;
         _skillEventSourcingHandler = skillEventSourcingHandler;
         _companyEventSourcingHandler = companyEventSourcingHandler;
+        _userEventSourcingHandler = userEventSourcingHandler;
     }
 
 
@@ -39,19 +46,40 @@ public class CommandHandler : ICommandHandler
         await _companyEventSourcingHandler.SaveAsync(aggregate);
     }
 
-    public Task HandleAsync(UpdateCompanyCommand command)
+    public async Task HandleAsync(UpdateCompanyCommand command)
     {
-        throw new NotImplementedException();
+        var aggregate = await _companyEventSourcingHandler.GetByIdAsync(command.Id);
+
+        aggregate.UpdateCompany(command.Id,
+                                command.Name,
+                                command.LegalName,
+                                command.Address,
+                                command.Phone,
+                                command.Email,
+                                command.Website,
+                                command.Industry,
+                                command.Size,
+                                command.FoundingDate);
+
+        await _companyEventSourcingHandler.SaveAsync(aggregate);
     }
 
-    public Task HandleAsync(DisableCompanyCommand command)
+    public async Task HandleAsync(DisableCompanyCommand command)
     {
-        throw new NotImplementedException();
+        var aggregate = await _companyEventSourcingHandler.GetByIdAsync(command.Id);
+        aggregate.DisableCompany(command.Id, command.IsActive);
+
+        await _companyEventSourcingHandler.SaveAsync(aggregate);
     }
 
-    public Task HandleAsync(DeleteCompanyCommand command)
+    public async Task HandleAsync(DeleteCompanyCommand command)
     {
-        throw new NotImplementedException();
+        var aggregate = await _companyEventSourcingHandler.GetByIdAsync(command.Id);
+
+        aggregate.DeleteCompany(command.Id, command.IsDeleted);
+
+        await _companyEventSourcingHandler.SaveAsync(aggregate);
+
     }
 
     public async Task HandleAsync(CreateJobCommand command)
@@ -140,5 +168,37 @@ public class CommandHandler : ICommandHandler
         aggregate.DeletedSkill(command.Id, command.IsDeleted);
 
         await _skillEventSourcingHandler.SaveAsync(aggregate);
+    }
+
+    public async Task HandleAsync(CreateUserCommand command)
+    {
+        var aggregate = new UserAggregate(command.Id,
+                                          command.FullName,
+                                          command.UserName,
+                                          command.Email,
+                                          command.PhoneNumber,
+                                          command.Password);
+
+        await _userEventSourcingHandler.SaveAsync(aggregate);
+    }
+
+    public Task HandleAsync(UpdateUserCommand command)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task HandleAsync(DisableUserCommand command)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task HandleAsync(DeleteUserCommand command)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task HandleAsync(UpdatePasswordUserCommand command)
+    {
+        throw new NotImplementedException();
     }
 }

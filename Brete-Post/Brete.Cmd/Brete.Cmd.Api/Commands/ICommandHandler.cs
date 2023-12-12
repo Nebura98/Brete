@@ -1,6 +1,7 @@
 ﻿using Brete.Cmd.Api.Commands.Company;
 using Brete.Cmd.Api.Commands.Job;
 using Brete.Cmd.Api.Commands.Skill;
+using Brete.Cmd.Api.Commands.User;
 
 namespace Brete.Cmd.Api.Commands;
 
@@ -20,4 +21,9 @@ public interface ICommandHandler
     Task HandleAsync(UpdateSkillCommand command);
     Task HandleAsync(DisableSkillCommand command);
     Task HandleAsync(DeleteSkillCommand command);
+    Task HandleAsync(CreateUserCommand command);
+    Task HandleAsync(UpdateUserCommand command);
+    Task HandleAsync(DisableUserCommand command);
+    Task HandleAsync(DeleteUserCommand command);
+    Task HandleAsync(UpdatePasswordUserCommand command);
 }

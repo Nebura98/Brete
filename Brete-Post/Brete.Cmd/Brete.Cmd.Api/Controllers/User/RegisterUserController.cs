@@ -1,4 +1,4 @@
-﻿using Brete.Cmd.Api.Commands.Skill;
+﻿using Brete.Cmd.Api.Commands.User;
 using CQRS.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Post.Common.DTOs;
@@ -14,21 +14,20 @@ public class RegisterUserController : ControllerBase
 
     public RegisterUserController(ICommandDispatcher commandDispatcher, ILogger<RegisterUserController> logger)
     {
-        _commandDispatcher = commandDispatcher;
         _logger = logger;
+        _commandDispatcher = commandDispatcher;
     }
 
     [HttpPost]
-    public async Task<IActionResult> RegisterUserAsync(CreateSkillCommand command)
+    public async Task<IActionResult> RegisterUserAsync(CreateUserCommand command)
     {
         try
         {
-            command.Id = Guid.NewGuid();
             await _commandDispatcher.SendAsync(command);
 
             return Ok(new BaseResponse
             {
-                Message = "Add Skill request completed successfully!"
+                Message = "Add User request completed successfully!"
             });
         }
         catch (InvalidOperationException ex)

@@ -7,6 +7,6 @@ public sealed record CompanyDeletedEvent : BaseEvent
     public CompanyDeletedEvent() : base(nameof(CompanyDeletedEvent))
     {
     }
-    public bool IsActive { get; set; }
+    public bool IsDeleted { get; set; }
 
 }

@@ -1,6 +1,7 @@
 ﻿using Brete.Query.Domain.Entities;
 using Brete.Query.Domain.Repositories;
 using Microsoft.Extensions.Caching.Distributed;
+using System.Text.Json;
 
 namespace Brete.Query.Infrastructure.Repositories;
 
@@ -17,22 +18,35 @@ public class CachedCompanyRepository : ICompanyRepository
 
     public async Task CreateAsync(CompanyEntity company)
     {
+
         await _decorated.CreateAsync(company);
+
+        string key = $"company-{company.Id}";
+
+        await _distributedCache.SetStringAsync(key, JsonSerializer.Serialize(company));
     }
 
-    public Task DeleteAsync(CompanyEntity value)
+    public async Task DeleteAsync(CompanyEntity company)
     {
-        throw new NotImplementedException();
+        await _decorated.DeleteAsync(company);
+
+        string key = $"company-{company.Id}";
+
+        await _distributedCache.RemoveAsync(key);
     }
 
-    public Task DisableAsync(CompanyEntity value)
+    public async Task DisableAsync(CompanyEntity company)
     {
-        throw new NotImplementedException();
+        await _decorated.DisableAsync(company);
+
+        string key = $"company-{company.Id}";
+
+        await _distributedCache.RemoveAsync(key);
     }
 
-    public Task<CompanyEntity?> GetByIdAsync(Guid id)
+    public async Task<CompanyEntity?> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _decorated.GetByIdAsync(id);
     }
 
     public Task<List<CompanyEntity?>> ListAllAsync()
@@ -45,8 +59,14 @@ public class CachedCompanyRepository : ICompanyRepository
         throw new NotImplementedException();
     }
 
-    public Task UpdateAsync(CompanyEntity value)
+    public async Task UpdateAsync(CompanyEntity company)
     {
-        throw new NotImplementedException();
+        await _decorated.UpdateAsync(company);
+
+        string key = $"company-{company.Id}";
+
+        await _distributedCache.RemoveAsync(key);
+
+        await _distributedCache.SetStringAsync(key, JsonSerializer.Serialize(company));
     }
 }

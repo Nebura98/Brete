@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Brete.Query.Domain.Entities;
 
@@ -14,9 +15,7 @@ public class UserEntity : BaseEntity
 
     [Required, StringLength(50)]
     public string Email { get; set; }
-
-    [Required, StringLength(50)]
-    public bool IsEmailConfirmed { get; set; }
+    [Required, JsonIgnore]
     public string Password { get; set; }
 
     [StringLength(20)]

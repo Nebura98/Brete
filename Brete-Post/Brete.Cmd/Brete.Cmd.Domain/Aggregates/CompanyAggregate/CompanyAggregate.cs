@@ -12,7 +12,17 @@ public sealed class CompanyAggregate : AggregateRoot
     {
     }
 
-    public CompanyAggregate(Guid companyId, string name, string legalName, string address, string phone, string email, string website, string industry, string size, DateTime foundingDate)
+    public CompanyAggregate(
+        Guid companyId,
+        string name,
+        string legalName,
+        string address,
+        string phone,
+        string email,
+        string website,
+        string industry,
+        string size,
+        DateTime foundingDate)
     {
         RaiseEvent(new CompanyCreatedEvent
         {
@@ -35,23 +45,31 @@ public sealed class CompanyAggregate : AggregateRoot
         _active = true;
     }
 
-    public void UpdateCompany(string name, string legalName, string address, string phone, string email, string website, string industry, string size, DateOnly foundingDate, string status, bool isActive)
+    public void UpdateCompany(
+        Guid companyId,
+        string name,
+        string legalName,
+        string address,
+        string phone,
+        string email,
+        string website,
+        string industry,
+        string size,
+        DateTime foundingDate)
     {
-        RaiseEvent(
-            new CompanyUpdatedEvent
-            {
-                Name = name,
-                LegalName = legalName,
-                Address = address,
-                Phone = phone,
-                Email = email,
-                Website = website,
-                Industry = industry,
-                Size = size,
-                FoundingDate = foundingDate,
-                Status = status,
-                IsActive = isActive
-            });
+        RaiseEvent(new CompanyUpdatedEvent
+        {
+            Id = companyId,
+            Name = name,
+            LegalName = legalName,
+            Address = address,
+            Phone = phone,
+            Email = email,
+            Website = website,
+            Industry = industry,
+            Size = size,
+            FoundingDate = foundingDate,
+        });
     }
 
     public void Apply(CompanyUpdatedEvent @event)
@@ -60,13 +78,13 @@ public sealed class CompanyAggregate : AggregateRoot
         _active = true;
     }
 
-    public void DisableCompany(Guid companyId)
+    public void DisableCompany(Guid companyId, bool isActive)
     {
-        RaiseEvent(
-            new CompanyDisableEvent
-            {
-                Id = companyId
-            });
+        RaiseEvent(new CompanyDisableEvent
+        {
+            Id = companyId,
+            IsActive = isActive
+        });
     }
 
     public void Apply(CompanyDisableEvent @event)
@@ -75,13 +93,13 @@ public sealed class CompanyAggregate : AggregateRoot
         _active = true;
     }
 
-    public void RemoveCompany(Guid companyId)
+    public void DeleteCompany(Guid companyId, bool isDeleted)
     {
-        RaiseEvent(
-            new CompanyDeletedEvent
-            {
-                Id = companyId
-            });
+        RaiseEvent(new CompanyDeletedEvent
+        {
+            Id = companyId,
+            IsDeleted = isDeleted
+        });
     }
 
     public void Apply(CompanyDeletedEvent @event)

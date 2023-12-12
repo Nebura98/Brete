@@ -4,11 +4,11 @@ using CQRS.Core.Queries;
 
 namespace Brete.Query.Infrastructure.Dispatchers;
 
-public class QueryDispatcher : IQueryDispatcher<CompanyEntity>
+public class QueryDispatcher : IQueryDispatcher<UserEntity>
 {
-    private readonly Dictionary<Type, Func<BaseQuery, Task<List<CompanyEntity>>>> _handlers = new();
+    private readonly Dictionary<Type, Func<BaseQuery, Task<List<UserEntity>>>> _handlers = new();
 
-    public void RegisterHandler<TQuery>(Func<TQuery, Task<List<CompanyEntity>>> handler) where TQuery : BaseQuery
+    public void RegisterHandler<TQuery>(Func<TQuery, Task<List<UserEntity>>> handler) where TQuery : BaseQuery
     {
         if (_handlers.ContainsKey(typeof(TQuery)))
         {
@@ -18,9 +18,9 @@ public class QueryDispatcher : IQueryDispatcher<CompanyEntity>
         _handlers.Add(typeof(TQuery), x => handler((TQuery)x));
     }
 
-    public async Task<List<CompanyEntity>> SendAsync(BaseQuery query)
+    public async Task<List<UserEntity>> SendAsync(BaseQuery query)
     {
-        if (_handlers.TryGetValue(query.GetType(), out Func<BaseQuery, Task<List<CompanyEntity>>> handler))
+        if (_handlers.TryGetValue(query.GetType(), out Func<BaseQuery, Task<List<UserEntity>>> handler))
         {
             return await handler(query);
         }

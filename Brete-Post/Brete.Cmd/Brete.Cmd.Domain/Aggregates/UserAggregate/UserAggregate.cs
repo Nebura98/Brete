@@ -5,10 +5,19 @@ namespace Brete.Cmd.Domain.Aggregates.UserAggregate;
 
 public sealed class UserAggregate : AggregateRoot
 {
-    public UserAggregate(string fullName, string userName, string email, string phoneNumber, string password)
+    private bool _active;
+
+    public bool Active { get => _active; set => _active = value; }
+
+    public UserAggregate()
+    {
+    }
+
+    public UserAggregate(Guid id, string fullName, string userName, string email, string phoneNumber, string password)
     {
         RaiseEvent(new UserCreatedEvent
         {
+            Id = id,
             FullName = fullName,
             UserName = userName,
             Email = email,
@@ -34,7 +43,7 @@ public sealed class UserAggregate : AggregateRoot
 
     public void Apply(UserUpdatedEvent @event) { }
 
-    public void UpdatedUserSwitched() { }
+    public void UpdatedUserDisable() { }
 
     public void Apply(UserDisableEvent @event) { }
 

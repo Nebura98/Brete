@@ -2,6 +2,7 @@
 using Brete.Query.Domain.Repositories;
 using Brete.Query.Infrastructure.DataAccess;
 using CQRS.Core.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace Brete.Query.Infrastructure.Repositories;
 
@@ -22,20 +23,32 @@ public class CompanyRepository : ICompanyRepository, ISQLRepository<CompanyEntit
         _ = await context.SaveChangesAsync();
     }
 
-    public Task DeleteAsync(CompanyEntity value)
+    public async Task DeleteAsync(CompanyEntity company)
     {
+        using DatabaseContext context = _databaseContextFactory.CreateDbContext();
+        context.Company.Update(company);
+
+        _ = await context.SaveChangesAsync();
         throw new NotImplementedException();
     }
 
-    public Task DisableAsync(CompanyEntity value)
+    public async Task DisableAsync(CompanyEntity company)
     {
-        throw new NotImplementedException();
+        using DatabaseContext context = _databaseContextFactory.CreateDbContext();
+
+        context.Company.Update(company);
+
+        _ = await context.SaveChangesAsync();
     }
 
-    public Task<CompanyEntity?> GetByIdAsync(Guid id)
+    public async Task<CompanyEntity?> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        using DatabaseContext context = _databaseContextFactory.CreateDbContext();
+
+        return await context.Company.
+                            FirstOrDefaultAsync(company => company.Id == id);
     }
+
 
     public Task<bool> HasValueInDatabaseAsync(CompanyEntity value)
     {
@@ -52,8 +65,12 @@ public class CompanyRepository : ICompanyRepository, ISQLRepository<CompanyEntit
         throw new NotImplementedException();
     }
 
-    public Task UpdateAsync(CompanyEntity value)
+    public async Task UpdateAsync(CompanyEntity company)
     {
-        throw new NotImplementedException();
+        using DatabaseContext context = _databaseContextFactory.CreateDbContext();
+
+        context.Company.Update(company);
+
+        _ = await context.SaveChangesAsync();
     }
 }

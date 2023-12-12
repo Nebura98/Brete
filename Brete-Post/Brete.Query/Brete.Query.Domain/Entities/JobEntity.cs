@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Brete.Query.Domain.Entities;
 
@@ -21,6 +22,6 @@ public class JobEntity : BaseEntity
     public string Seniority { get; set; }
     [Required]
     public string Modality { get; set; }
-    [Required]
+    [Required, JsonIgnore]
     public bool IsEdited { get; set; }
 }

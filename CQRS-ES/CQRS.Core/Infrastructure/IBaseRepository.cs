@@ -7,5 +7,5 @@ public interface IBaseRepository<T>
     Task DisableAsync(T value);
     Task DeleteAsync(T value);
     Task<T?> GetByIdAsync(Guid id);
-    Task<List<T?>> ListAllAsync();
+    Task<List<T>> ListAllAsync();
 }
